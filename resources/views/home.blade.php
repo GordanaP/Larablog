@@ -1,17 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Dashboard')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">Dashboard</div>
 
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            You are logged in!
-        </div>
+    <div class="container-fluid">
+      <h1 class="h3 text-gray-800">Blank Page</h1>
     </div>
+
 @endsection
