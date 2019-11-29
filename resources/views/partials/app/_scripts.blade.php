@@ -1,3 +1,12 @@
+<!-- Custom -->
+<script type="text/javascript" src="{{ asset('js/helpers.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/form_helpers.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/modal_helpers.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/delete_checked.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/radio_check.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/checkbox_check.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/pluralize.js') }}"></script>
+
 <!-- Datatables -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>

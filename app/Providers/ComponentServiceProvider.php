@@ -25,5 +25,6 @@ class ComponentServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::component('components.admin.nav_item_collapsed', 'navItemCollapsed');
+        Blade::component('components.admin.datatable', 'dataTable');
     }
 }

@@ -8,7 +8,7 @@ class="text-gray-900 antialiased leading-tight">
         <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     </head>
 
-    <body id="page-top">
+    <body id="page-top" class="min-h-screen bg-white font-sans">
         <div id="wrapper">
 
             @include('partials.admin._side')

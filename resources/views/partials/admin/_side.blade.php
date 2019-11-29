@@ -19,8 +19,12 @@
     <hr class="sidebar-divider mb-1">
 
     @navItemCollapsed(['id' => 'Roles', 'icon' => 'fa-briefcase'])
-        <a class="collapse-item px-0 py-1" href="#">View all</a>
-        <a class="collapse-item px-0 py-1" href="#">Add new</a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.roles.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.roles.create') }}">
+            Add new
+        </a>
     @endnavItemCollapsed
 
     @navItemCollapsed(['id' => 'Users', 'icon' => 'fa-users'])
