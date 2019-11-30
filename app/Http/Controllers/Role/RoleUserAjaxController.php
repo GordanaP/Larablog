@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Role;
 
 use App\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\UserResource;
 
-class RoleAjaxController extends Controller
+class RoleUserAjaxController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Role $role)
     {
         return response([
-            'data' => RoleResource::collection(Role::all())
+            'data' => UserResource::collection($role->users)
         ]);
     }
 }

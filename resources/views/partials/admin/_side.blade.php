@@ -28,8 +28,12 @@
     @endnavItemCollapsed
 
     @navItemCollapsed(['id' => 'Users', 'icon' => 'fa-users'])
-        <a class="collapse-item px-0 py-1" href="#">View all</a>
-        <a class="collapse-item px-0 py-1" href="#">Add new</a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.users.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.users.create') }}">
+            Add new
+        </a>
     @endnavItemCollapsed
 
     <hr class="sidebar-divider mt-1">

@@ -25,7 +25,21 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Role</th>
+        <th>Roles</th>
         <th class="w-1/5"></th>
     @enddataTable
+@endsection
+
+@section('scripts')
+    <script>
+
+        var records = 'Users';
+        var parentId = "{{ $role->slug }}";
+        var parentRecords = 'roles';
+
+        @include('partials.users._datatable')
+
+        @include('partials.datatables._delete_records')
+
+    </script>
 @endsection

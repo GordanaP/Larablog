@@ -11,17 +11,35 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'Admin\AdminPageController@index')
     ->name('admin.pages.index');
 
-Route::prefix('admin')->name('admin.')->namespace('Role')
+/**
+ * Admin Role
+ */
+Route::prefix('admin')->namespace('Role')
     ->group(function(){
-        Route::get('roles/list', 'RoleAjaxController@index')
-            ->name('roles.list');
+        Route::get('roles/list', 'RoleAjaxController@index');
         Route::delete('roles/{role?}', 'RoleController@destroy')
-            ->name('roles.destroy');
+            ->name('admin.roles.destroy');
         Route::resource('roles', 'RoleController', [
-            'parameters' => ['' => 'role']
+            'parameters' => ['' => 'role'],
+            'as' => 'admin'
         ])->except('destroy');
         Route::resource('roles.users', 'RoleUserController', [
-            'parameters' => ['' => 'role']
+            'parameters' => ['' => 'role'],
+            'as' => 'admin'
         ])->only('create');
+        Route::get('roles/{role}/users/list', 'RoleUserAjaxController@index');
     });
 
+/**
+ * Admin User
+ */
+Route::prefix('admin')->namespace('User')
+    ->group(function () {
+        Route::get('users/list', 'UserAjaxController@index');
+        Route::delete('users/{user?}', 'UserController@destroy')
+            ->name('admin.users.destroy');
+        Route::resource('users', 'UserController', [
+            'parameters' => ['' => 'user'],
+            'as' => 'admin'
+        ])->except('destroy');
+    });

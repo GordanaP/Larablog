@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Role;
+namespace App\Http\Controllers\User;
 
-use App\Role;
+use App\User;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\UserResource;
 
-class RoleAjaxController extends Controller
+class UserAjaxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class RoleAjaxController extends Controller
     public function index()
     {
         return response([
-            'data' => RoleResource::collection(Role::all())
+            'data' => UserResource::collection(User::all())
         ]);
     }
 }
