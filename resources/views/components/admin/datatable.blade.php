@@ -10,6 +10,8 @@
             </th>
 
             {{ $slot }}
+
+            <th class="w-1/5"></th>
         </thead>
 
         <tbody></tbody>

@@ -8,10 +8,10 @@
         @endviewAll
     @endheader
 
-    @show
-        @include('partials.roles._table_show', [
-            'role' => $role
-        ])
+    @show(['model' => $role, 'records' => 'roles'])
+        @rowInfo(['name' => 'Name'])
+            {{ $role->name }}
+        @endrowInfo
     @endshow
 
     <div id="cardUsers">
@@ -26,7 +26,6 @@
         <th>Name</th>
         <th>Email</th>
         <th>Roles</th>
-        <th class="w-1/5"></th>
     @enddataTable
 @endsection
 

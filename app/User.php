@@ -47,4 +47,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    /**
+     * Remove the user.
+     */
+    public function remove()
+    {
+        $this->roles()->detach();
+
+        $this->delete();
+    }
 }

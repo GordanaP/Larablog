@@ -18,7 +18,7 @@ class RoleResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'users_count' => $this->users->count(),
+            'users_count' => $this->users_count,
             'link' => [
                 'show' => route('admin.roles.show', $this),
                 'edit' => route('admin.roles.edit', $this),

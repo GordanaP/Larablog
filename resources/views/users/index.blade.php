@@ -15,7 +15,6 @@
         <th>Name</th>
         <th>Email</th>
         <th>Roles</th>
-        <th class="w-1/5"></th>
     @enddataTable
 @endsection
 
@@ -25,7 +24,6 @@
         var records = 'Users';
         var parentId = null;
         var parentRecords = null;
-
 
         @include('partials.users._datatable')
 

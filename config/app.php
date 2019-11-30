@@ -230,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'RedirectTo' => App\Facades\RedirectTo::class,
         'ManageRole' => App\Facades\ManageRole::class,
+        'ManageUser' => App\Facades\ManageUser::class,
     ],
 
 ];
