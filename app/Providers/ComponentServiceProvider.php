@@ -27,10 +27,14 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('components.admin.nav_item_collapsed', 'navItemCollapsed');
         Blade::component('components.admin.datatable', 'dataTable');
         Blade::component('components.admin.btn_add_new', 'addNew');
+        Blade::component('components.admin.btn_delete', 'delete');
+        Blade::component('components.admin.btn_edit', 'edit');
         Blade::component('components.admin.btn_view_all', 'viewAll');
         Blade::component('components.admin.btn_submit', 'submit');
         Blade::component('components.admin.btn_submit_handle', 'buttonSubmit');
         Blade::component('components.admin.page_header', 'header');
+        Blade::component('components.admin.row_info', 'rowInfo');
+        Blade::component('components.admin.table_show', 'show');
         Blade::component('components.error', 'isInvalid');
         Blade::component('components.asterisks', 'asterisks');
         Blade::component('components.required_fields', 'required');

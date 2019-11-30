@@ -4,7 +4,7 @@
 
 @section('content')
     @header(['title' => 'roles', 'records_count' => \App\Role::count()])
-        @addNew(['record' => 'role', 'route' => route('admin.roles.create')])
+        @addNew(['route' => route('admin.roles.create')])
         @endaddNew
     @endheader
 

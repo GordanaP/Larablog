@@ -9,7 +9,7 @@
 
     <hr class="sidebar-divider my-0">
 
-    <li class="nav-item active">
+    <li class="nav-item text-white-50 font-bold">
         <a class="nav-link" href="{{ route('admin.pages.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
