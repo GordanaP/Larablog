@@ -1,1 +1,3 @@
 li.active { background: yellow !important; }
+a { text-decoration: none !important; }
+.asterisks { color: #f56565 !important }

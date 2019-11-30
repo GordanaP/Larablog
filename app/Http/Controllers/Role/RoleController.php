@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Role;
 
-use App\Http\Controllers\Controller;
 use App\Role;
+use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleRequest;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
@@ -25,18 +27,20 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $role = Role::create($request->all());
+
+        return RedirectTo::route('admin.roles', $role);
     }
 
     /**
@@ -47,7 +51,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('roles.show', compact('role'));
     }
 
     /**

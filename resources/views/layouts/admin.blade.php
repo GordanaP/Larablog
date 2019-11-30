@@ -8,7 +8,7 @@ class="text-gray-900 antialiased leading-tight">
         <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     </head>
 
-    <body id="page-top" class="min-h-screen bg-white font-sans">
+    <body id="page-top" class="min-h-screen font-sans text-gray-800">
         <div id="wrapper">
 
             @include('partials.admin._side')
@@ -18,8 +18,9 @@ class="text-gray-900 antialiased leading-tight">
 
                     @include('partials.admin._navbar')
 
-                    @yield('content')
-
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div>
                 </div>
 
                 @include('partials.admin._footer')

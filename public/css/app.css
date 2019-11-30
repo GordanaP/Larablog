@@ -11643,11 +11643,11 @@ hr {
   font-weight: 600;
 }
 
-.uppercase-xs {
+.uppercase-sm {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .btn-info {
@@ -11656,6 +11656,19 @@ hr {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
+}
+
+.btn-blue {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #63b3ed;
+  border-color: #63b3ed;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
 .btn-teal {
