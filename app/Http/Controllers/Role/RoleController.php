@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Role;
 
 use App\Role;
+use App\Facades\ManageRole;
 use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleRequest;
@@ -82,11 +83,14 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(RoleRequest $request, Role $role = null)
     {
-        //
+        ManageRole::delete();
+
+        return RedirectTo::route('admin.roles');
     }
 }

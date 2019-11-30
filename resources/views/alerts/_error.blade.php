@@ -1,0 +1,1 @@
+<div class="invalid-feedback ids bg-red-100 mb-3 p-3 w-full text-center hidden"></div>

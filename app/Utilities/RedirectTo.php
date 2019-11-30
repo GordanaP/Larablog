@@ -34,7 +34,7 @@ class RedirectTo
      * @param  \App\Model $parameter
      * @return \Illuminate\Http\Response
      */
-    public function route($name, $parameter)
+    public function route($name, $parameter = null)
     {
         switch ($this->method) {
             case 'POST':
@@ -103,10 +103,9 @@ class RedirectTo
     {
         if(request()->ajax()) {
             return response([
-                'alertMessage' => 'The record has been deleted.',
+                'message' => 'The record has been deleted.',
             ]);
-        }
-        else {
+        } else {
             return $this->toRoute($routeName,'.index')
                 ->with('The record has been deleted.', 'success');
         }

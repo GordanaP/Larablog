@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +49,36 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof MethodNotAllowedHttpException && $request->ajax()) {
+            return response()->json([
+                'errors' => [
+                    'ids' => [
+                        0 => 'You are not authorized to perform the action.'
+                    ],
+                ]
+            ], 405);
+        }
+
+        if ($exception instanceof ModelNotFoundException && $request->ajax()) {
+            return response()->json([
+                'errors' => [
+                    'ids' => [
+                        0 => 'The selected value is invalid.'
+                    ],
+                ]
+            ], 404);
+        }
+
+        if ($exception instanceof QueryException && $request->ajax()) {
+            return response()->json([
+                'errors' => [
+                    'ids' => [
+                        0 => 'The selected value is invalid.'
+                    ],
+                ]
+            ], 404);
+        }
+
         return parent::render($request, $exception);
     }
 }
