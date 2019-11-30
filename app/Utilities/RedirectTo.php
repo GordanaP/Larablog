@@ -42,7 +42,7 @@ class RedirectTo
                     ->with('A new record has been added.', 'success');
                 break;
 
-            case 'PUT' || 'PATCH':
+            case 'PUT':
                 return $this->handlePutRequest($name, $parameter)
                     ->with('The changes have been saved.', 'success');
                 break;
@@ -82,7 +82,7 @@ class RedirectTo
      */
     private function handlePutRequest($routeName, $parameter)
     {
-        switch ($this->handleSubmission) {
+        switch ($this->handle_submission) {
             case 'do_and_show':
                 return $this->toRoute($routeName,'.show', $parameter);
                 break;

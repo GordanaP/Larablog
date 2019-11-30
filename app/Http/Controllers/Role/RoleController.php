@@ -38,7 +38,7 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        $role = Role::create($request->all());
+        $role = Role::create($request->validated());
 
         return RedirectTo::route('admin.roles', $role);
     }
@@ -62,19 +62,21 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('roles.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->update($request->validated());
+
+        return RedirectTo::route('admin.roles', $role);
     }
 
     /**

@@ -1,5 +1,10 @@
 <form action="{{ $route }}" method="POST">
+
     @csrf
+
+    @if (Request::route('role'))
+        @method('PUT')
+    @endif
 
     @required @endrequired
 
