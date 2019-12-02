@@ -4,6 +4,24 @@ function clearErrorOnNewInput()
         clearError(errorBox($(this).attr('name')));
         clearError(errorBox($(this).attr('name'), 'p.'));
     });
+
+    $("select").on('change', function () {
+        clearError(errorBox($(this).attr('name')));
+        clearError(errorBox($(this).attr('name'), 'p.'));
+    });
+
+    $("input[type=radio]").on('click', function() {
+        clearError(errorBox($(this).attr('name')));
+        clearError(errorBox($(this).attr('name'), 'p.'));
+    });
+
+    $("input[type=checkbox]").on('click', function() {
+
+        var name = $(this).attr('name').slice(0,-2);
+
+        clearError(errorBox(name));
+        clearError(errorBox(name, 'p.'));
+    })
 }
 
 function displayErrors(errors, htmlEl = 'span.')
@@ -101,4 +119,9 @@ function makeArray(data)
     return $.map(data, function(value, index){
         return [value];
     });
+}
+
+function createById(name)
+{
+    return $('#'+name);
 }

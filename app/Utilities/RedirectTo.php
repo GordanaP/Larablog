@@ -2,7 +2,11 @@
 
 namespace App\Utilities;
 
-class RedirectTo
+use Illuminate\Support\Str;
+use App\Utilities\RedirectRoute;
+use Illuminate\Support\Facades\Auth;
+
+class RedirectTo extends RedirectRoute
 {
     /**
      * The handle submission request.
@@ -23,6 +27,7 @@ class RedirectTo
      */
     public function __construct()
     {
+        $this->user = Auth::user();
         $this->handle_submission = request('handle_submission');
         $this->method = request()->method();
     }
@@ -64,7 +69,7 @@ class RedirectTo
     {
         switch ($this->handle_submission) {
             case 'do_and_show':
-                return $this->toRoute($routeName,'.show', $parameter);
+                return $this->toShow($routeName, $parameter);
                 break;
 
             case 'do_and_repeat':
@@ -84,11 +89,11 @@ class RedirectTo
     {
         switch ($this->handle_submission) {
             case 'do_and_show':
-                return $this->toRoute($routeName,'.show', $parameter);
+                return $this->toShow($routeName, $parameter);
                 break;
 
             case 'do_and_repeat':
-                return $this->toRoute($routeName,'.edit', $parameter);
+                return $this->toEdit($routeName, $parameter);
                 break;
         }
     }
@@ -106,20 +111,8 @@ class RedirectTo
                 'message' => 'The record has been deleted.',
             ]);
         } else {
-            return $this->toRoute($routeName,'.index')
+            return $this->toIndex($routeName)
                 ->with('The record has been deleted.', 'success');
         }
-    }
-
-    /**
-     * Redirect to a route.
-     *
-     * @param  string $name
-     * @param  \App\Model $parameter
-     * @return \Illuminate\Http\Response
-     */
-    private function toRoute($name, $extension, $parameter = null)
-    {
-        return redirect()->route($name . $extension, $parameter);
     }
 }

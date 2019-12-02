@@ -19,3 +19,11 @@
 
     @buttonSubmit(['model' => 'role']) @endbuttonSubmit
 </form>
+
+@section('scripts')
+    <script>
+
+        clearErrorOnNewInput();
+
+    </script>
+@endsection

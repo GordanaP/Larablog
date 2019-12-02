@@ -32,6 +32,10 @@ class UserRequest extends FormRequest
                 'sometimes','required', 'email', 'max:100',
                 Rule::unique('users')->ignore(optional($this->user)->id)
             ],
+            'handle_submission' => [
+                'sometimes', 'required',
+                Rule::in(['do_and_show', 'do_and_repeat'])
+            ],
         ];
 
         if(Auth::user()->is_admin) {
@@ -40,8 +44,7 @@ class UserRequest extends FormRequest
                 'sometimes', 'required',
                 Rule::in(['auto_generate', 'manually_generate', 'do_not_change'])
             ];
-            if($this->generate_password == 'manually_generate')
-            {
+            if($this->generate_password == 'manually_generate') {
                 $rules['password'] = ['required', 'min:8'];
             }
         }

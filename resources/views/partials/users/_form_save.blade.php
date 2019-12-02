@@ -47,7 +47,7 @@
         @isInvalid(['field' => 'password'])@endisInvalid
 
         @admin
-            @isInvalid(['field' => 'generate_password'])@endisInvalid
+            @isInvalid(['field' => 'generate_password']) @endisInvalid
         @endadmin
 
         <!-- Password confirm -->
@@ -67,13 +67,21 @@
 @section('scripts')
     @admin
         <script>
-
+            var user = "{{ Request::route('user') }}";
             var form = $('#saveUser');
-            var radioOption = $('#manualPassword');
-            var hiddenInput = $('#password').hide();
+            var manualPassword = $('#manualPassword');
+            var autoPassword = $('#autoPassword');
+            var doNotChangePassword = $('#doNotChangePassword');
+            var hiddenInput = $('#password');
             var hiddenError = $('p.password');
 
-            toggleHidden(radioName(form), optionValue(radioOption), hiddenInput, hiddenError)
+            clearErrorOnNewInput();
+
+            hiddenInput.hide();
+
+            user ? check(doNotChangePassword) : check(autoPassword);
+
+            toggleHidden(radioName(form), optionValue(manualPassword), hiddenInput, hiddenError)
 
         </script>
     @endadmin

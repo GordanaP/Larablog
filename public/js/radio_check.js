@@ -3,12 +3,8 @@ function toggleHidden(radioName, radioValue, hiddenElement, hiddenError)
     radioInput(radioName).change(function() {
 
         if(isCheckedRadioValue(radioName, radioValue)) {
-            // showElement(hiddenElement)
             hiddenElement.show()
-        }
-        else
-        {
-            // hideElement(hiddenElement)
+        } else {
             hiddenElement.hide()
             resetInput(hiddenElement)
             emptyElement(hiddenError)
@@ -16,8 +12,8 @@ function toggleHidden(radioName, radioValue, hiddenElement, hiddenError)
     });
 
     if (! isEmptyElement( hiddenError )) {
-        showElement(hiddenElement);
-        checkRadioDefault(radioName);
+        hiddenElement.show();
+        check($('input[value="'+ radioValue +'"]'));
     }
 }
 
@@ -51,3 +47,7 @@ function radioName(form)
     return form.find(inputType('radio')).attr('name');
 }
 
+function check(el)
+{
+    return el.prop("checked", true);
+}

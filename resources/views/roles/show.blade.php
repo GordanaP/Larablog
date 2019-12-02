@@ -16,7 +16,7 @@
 
     <div id="cardUsers">
         @header(['title' => $role->name . " accounts", 'records_count' => $role->users_count])
-            @addNew (['route' => '#'])
+            @addNew (['route' => route('admin.roles.users.create', $role)])
             @endaddNew
         @endheader
     </div>

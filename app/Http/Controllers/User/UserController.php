@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\User;
 use App\Facades\ManageUser;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 
@@ -41,7 +40,7 @@ class UserController extends Controller
     {
         $user = ManageUser::create($request->validated());
 
-        return RedirectTo::route('admin.users', $user);
+        return RedirectTo::route('users', $user);
     }
 
     /**
@@ -75,9 +74,9 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        ManageUser::update($request->all());
+        ManageUser::update($request->validated());
 
-        return RedirectTo::route('admin.users', $user);
+        return RedirectTo::route('users', $user);
     }
 
     /**
@@ -86,10 +85,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, User $user = null)
+    public function destroy(UserRequest $request, User $user = null)
     {
         ManageUser::delete();
 
-        return RedirectTo::route('admin.users');
+        return RedirectTo::route('users');
     }
 }

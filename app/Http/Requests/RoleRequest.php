@@ -32,6 +32,10 @@ class RoleRequest extends FormRequest
                 Rule::unique('roles')->ignore(optional($this->role)->id),
                 new AlphaNumDashSpace
             ],
+            'handle_submission' => [
+                'sometimes', 'required',
+                Rule::in(['do_and_show', 'do_and_repeat'])
+            ],
         ];
     }
 }

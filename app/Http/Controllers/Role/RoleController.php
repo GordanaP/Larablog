@@ -41,7 +41,7 @@ class RoleController extends Controller
     {
         $role = Role::create($request->validated());
 
-        return RedirectTo::route('admin.roles', $role);
+        return RedirectTo::route('roles', $role);
     }
 
     /**
@@ -77,7 +77,7 @@ class RoleController extends Controller
     {
         $role->update($request->validated());
 
-        return RedirectTo::route('admin.roles', $role);
+        return RedirectTo::route('roles', $role);
     }
 
     /**
@@ -91,6 +91,6 @@ class RoleController extends Controller
     {
         ManageRole::delete();
 
-        return RedirectTo::route('admin.roles');
+        return RedirectTo::route('roles');
     }
 }

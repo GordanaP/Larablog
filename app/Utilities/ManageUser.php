@@ -8,7 +8,18 @@ use App\Utilities\ManageDelete;
 
 class ManageUser extends ManageDelete
 {
+    /**
+     * The roles.
+     *
+     * @var array
+     */
     private $roles;
+
+    /**
+     * The generate password option.
+     *
+     * @var string
+     */
     private $generate_password;
 
     /**
@@ -38,7 +49,7 @@ class ManageUser extends ManageDelete
      *
      * @param  array $data
      */
-    public function update(array $data)
+    public function update($data)
     {
         tap($this->user)->update($this->credentials($data))
             ->addRoles($this->roles);
