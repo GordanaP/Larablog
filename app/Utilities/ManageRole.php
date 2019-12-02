@@ -7,20 +7,6 @@ use App\Utilities\ManageDelete;
 class ManageRole extends ManageDelete
 {
     /**
-     * The model name.
-     *
-     * @var string
-     */
-    private $model;
-
-    /**
-     * The model instance.
-     *
-     * @var \App\Role
-     */
-    private $role;
-
-    /**
      * Create a class instance.
      */
     public function __construct()
@@ -36,6 +22,6 @@ class ManageRole extends ManageDelete
     {
         $this->setModel($this->model)
             ->setInstance($this->role)
-            ->destroy();
+            ->remove();
     }
 }

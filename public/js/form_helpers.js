@@ -95,3 +95,10 @@ function optionValue(option)
 {
     return option.val();
 }
+
+function makeArray(data)
+{
+    return $.map(data, function(value, index){
+        return [value];
+    });
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -18,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'roles' => optional($this->roles)->pluck('name'),
+            'roles' => $this->roles,
             'link' => [
                 'show' => route('admin.users.show', $this),
                 'edit' => route('admin.users.edit', $this),

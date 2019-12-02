@@ -15,8 +15,6 @@ class RoleUserAjaxController extends Controller
      */
     public function index(Role $role)
     {
-        return response([
-            'data' => UserResource::collection($role->users)
-        ]);
+        return UserResource::collection($role->users);
     }
 }

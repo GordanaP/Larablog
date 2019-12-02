@@ -26,11 +26,11 @@ abstract class ManageDelete
     /**
      * Delete the record.
      */
-    final function destroy()
+    final function remove()
     {
         is_array($this->instance)
-            ? $this->removeMany($this->instance)
-            : $this->instance->remove();
+            ? $this->deleteMany($this->instance)
+            : $this->instance->delete();
     }
 
     /**
@@ -60,12 +60,12 @@ abstract class ManageDelete
     }
 
     /**
-     * Remove multiple records.
+     * Delete multiple records.
      *
      * @param  \App\Model $instance
      */
-    private function removeMany($instance)
+    private function deleteMany($instance)
     {
-        $this->model::findMany($instance)->map->remove();
+        $this->model::findMany($instance)->map->delete();
     }
 }

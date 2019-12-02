@@ -3,13 +3,14 @@
 namespace App;
 
 use App\Traits\DatePresenter;
+use App\Traits\User\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use DatePresenter, Notifiable;
+    use DatePresenter, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -38,23 +39,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The roles owned by the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles()
+    public function setPasswordAttribute($value)
     {
-        return $this->belongsToMany(Role::class);
+        $this->attributes['password'] = \Hash::make($value);
     }
 
-    /**
-     * Remove the user.
-     */
-    public function remove()
-    {
-        $this->roles()->detach();
-
-        $this->delete();
-    }
 }

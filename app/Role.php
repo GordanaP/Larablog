@@ -43,14 +43,4 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
-    /**
-     * Remove a role.
-     */
-    public function remove()
-    {
-        $this->users()->detach();
-
-        $this->delete();
-    }
 }

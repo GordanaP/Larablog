@@ -15,8 +15,6 @@ class UserAjaxController extends Controller
      */
     public function index()
     {
-        return response([
-            'data' => UserResource::collection(User::all())
-        ]);
+        return UserResource::collection(User::all());
     }
 }

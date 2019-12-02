@@ -177,6 +177,8 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\UtilityServiceProvider::class,
+        App\Providers\DirectiveServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 

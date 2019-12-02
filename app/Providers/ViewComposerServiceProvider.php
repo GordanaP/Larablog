@@ -2,13 +2,11 @@
 
 namespace App\Providers;
 
-use App\Role;
-use App\User;
-use App\Observers\RoleObserver;
-use App\Observers\UserObserver;
+use App\ViewComposers\RolesComposer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class ObserverServiceProvider extends ServiceProvider
+class ViewComposerServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -27,7 +25,6 @@ class ObserverServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Role::observe(RoleObserver::class);
-        User::observe(UserObserver::class);
+        View::composer('partials.users._roles_checkboxes', RolesComposer::class);
     }
 }

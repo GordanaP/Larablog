@@ -1,13 +1,15 @@
-function toggleHiddenElement(radioName, radioValue, hiddenElement, hiddenError)
+function toggleHidden(radioName, radioValue, hiddenElement, hiddenError)
 {
     radioInput(radioName).change(function() {
 
         if(isCheckedRadioValue(radioName, radioValue)) {
-            showElement(hiddenElement)
+            // showElement(hiddenElement)
+            hiddenElement.show()
         }
         else
         {
-            hideElement(hiddenElement)
+            // hideElement(hiddenElement)
+            hiddenElement.hide()
             resetInput(hiddenElement)
             emptyElement(hiddenError)
         }

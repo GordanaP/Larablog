@@ -15,4 +15,5 @@ class RoleObserver
     {
         $model->slug = Str::slug($model->name);
     }
+
 }

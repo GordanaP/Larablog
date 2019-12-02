@@ -35,6 +35,7 @@ class="text-gray-900 antialiased leading-tight">
 
         <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
         <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
 
     </body>
 

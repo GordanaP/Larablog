@@ -1,11 +1,3 @@
-@extends('layouts.admin')
+@includeWhen(Auth::user()->is_admin, 'partials.pages._admin_home')
 
-@section('title', 'Dashboard')
-
-@section('content')
-
-    <div class="container-fluid">
-      <h1 class="h3 text-gray-800">Blank Page</h1>
-    </div>
-
-@endsection
+@includeWhen(! Auth::user()->is_admin, 'partials.pages._member_home')
