@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Role;
 
 use App\Role;
-use App\Facades\ManageRole;
 use App\Facades\RedirectTo;
+use App\Utilities\ManageRole;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 
@@ -88,7 +88,7 @@ class RoleController extends Controller
      */
     public function destroy(RoleRequest $request, Role $role = null)
     {
-        ManageRole::delete();
+        ManageRole::get()->delete();
 
         return RedirectTo::route('roles');
     }

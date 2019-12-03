@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use Illuminate\Support\Str;
 
-class RoleObserver
+class CategoryObserver
 {
     public function creating($model)
     {

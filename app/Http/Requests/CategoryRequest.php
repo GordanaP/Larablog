@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use App\Rules\AlphaNumDashSpace;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,10 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids' => 'sometimes|exists:roles,id',
+            'ids' => 'sometimes|exists:categories,id',
             'name' => [
                 'sometimes', 'required', 'min:2', 'max:50',
-                Rule::unique('roles')->ignore($this->role),
+                Rule::unique('categories')->ignore($this->category),
                 new AlphaNumDashSpace
             ],
             'handle_submission' => [

@@ -35,6 +35,15 @@
 
     <hr class="sidebar-divider mt-1">
 
+    @navItemCollapsed(['id' => 'Categories', 'icon' => 'fa-share-alt'])
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.categories.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.categories.create') }}">
+            Add new
+        </a>
+    @endnavItemCollapsed
+
     <!-- Sidebar -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

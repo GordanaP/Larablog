@@ -34,6 +34,16 @@ abstract class ManageDelete
     }
 
     /**
+     * Get the new instance of the class.
+     *
+     * @return \App\Model
+     */
+    public static function get()
+    {
+        return new static;
+    }
+
+    /**
      * Set the model name.
      *
      * @param string $model

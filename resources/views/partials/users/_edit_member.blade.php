@@ -8,8 +8,8 @@
 
     <div class="card card-body">
         @include('partials.users._form_save', [
+            'user' => $user,
             'route' => route('users.update', $user),
-            'user' => $user
         ])
     </div>
 

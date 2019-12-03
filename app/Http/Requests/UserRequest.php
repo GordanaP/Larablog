@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'name' => 'sometimes|required|alpha_num|max:100',
             'email' => [
                 'sometimes','required', 'email', 'max:100',
-                Rule::unique('users')->ignore(optional($this->user)->id)
+                Rule::unique('users')->ignore($this->user)
             ],
             'handle_submission' => [
                 'sometimes', 'required',

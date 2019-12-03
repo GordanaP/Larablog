@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Role;
-use App\User;
+use App\Category;
 use App\Observers\RoleObserver;
-use App\Observers\UserObserver;
+use App\Observers\CategoryObserver;
 use Illuminate\Support\ServiceProvider;
 
 class ObserverServiceProvider extends ServiceProvider
@@ -28,6 +28,6 @@ class ObserverServiceProvider extends ServiceProvider
     public function boot()
     {
         Role::observe(RoleObserver::class);
-        User::observe(UserObserver::class);
+        Category::observe(CategoryObserver::class);
     }
 }

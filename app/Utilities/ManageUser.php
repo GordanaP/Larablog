@@ -5,6 +5,7 @@ namespace App\Utilities;
 use App\User;
 use Illuminate\Support\Str;
 use App\Utilities\ManageDelete;
+use Illuminate\Support\Facades\Request;
 
 class ManageUser extends ManageDelete
 {
@@ -28,7 +29,7 @@ class ManageUser extends ManageDelete
     public function __construct()
     {
         $this->model = 'App\User';
-        $this->user = request()->route('user') ?? request('ids');
+        $this->user = Request::route('user') ?? request('ids');
         $this->roles = request('role_id');
         $this->generate_password = request('generate_password');
     }

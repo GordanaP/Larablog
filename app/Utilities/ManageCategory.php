@@ -5,29 +5,24 @@ namespace App\Utilities;
 use App\Utilities\ManageDelete;
 use Illuminate\Support\Facades\Request;
 
-class ManageRole extends ManageDelete
+class ManageCategory extends ManageDelete
 {
     /**
      * Create a class instance.
      */
     public function __construct()
     {
-        $this->model = 'App\Role';
-        $this->role = Request::route('role') ?? request('ids');
-    }
-
-    public static function get()
-    {
-        return new static;
+        $this->model = 'App\Category';
+        $this->category = Request::route('category') ?? request('ids');
     }
 
     /**
-     * Delete the role.
+     * Delete the category.
      */
     public function delete()
     {
         $this->setModel($this->model)
-            ->setInstance($this->role)
+            ->setInstance($this->category)
             ->remove();
     }
 }

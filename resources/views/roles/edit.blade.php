@@ -11,6 +11,7 @@
     <div class="card">
         <div class="card-body">
             @include('partials.roles._form_save', [
+                'role' => $role,
                 'route' => route('admin.roles.update', $role),
             ])
         </div>

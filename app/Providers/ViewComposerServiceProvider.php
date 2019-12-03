@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\RolesCountComposer;
 use App\ViewComposers\UsersCountComposer;
+use App\ViewComposers\CategoriesCountComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -30,5 +31,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('partials.users._roles_checkboxes', RolesComposer::class);
         View::composer('roles.index', RolesCountComposer::class);
         View::composer('users.index', UsersCountComposer::class);
+        View::composer('categories.index', CategoriesCountComposer::class);
     }
 }

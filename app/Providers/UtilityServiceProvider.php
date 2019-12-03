@@ -30,10 +30,6 @@ class UtilityServiceProvider extends ServiceProvider
             return new ManageUser;
         });
 
-        $this->app->bind('ManageRole', function($app) {
-            return new ManageRole;
-        });
-
         $this->app->bind('RedirectTo', function($app) {
             return new RedirectTo;
         });

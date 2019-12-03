@@ -13,7 +13,8 @@
     <div class="card p-3 w-3/4 mx-auto">
         <div class="card-body">
             @include('partials.users._form_save', [
-                'route' => route('admin.users.update',$user),
+                'user' => $user,
+                'route' => route('admin.users.update', $user),
             ])
         </div>
     </div>

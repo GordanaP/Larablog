@@ -18,6 +18,25 @@ Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
 
 /**
+ * Admin Category
+ */
+Route::middleware('admin')->prefix('admin')->namespace('Category')
+    ->group(function(){
+        Route::get('categories/list', 'CategoryAjaxController@index');
+        Route::delete('categories/{category?}', 'CategoryController@destroy')
+            ->name('admin.categories.destroy');
+        Route::resource('categories', 'CategoryController', [
+            'parameters' => ['' => 'category'],
+            'as' => 'admin'
+        ])->except('destroy');
+        // Route::resource('categories.articles', 'CategoryArticleController', [
+        //     'parameters' => ['' => 'category'],
+        //     'as' => 'admin'
+        // ])->only('create');
+        // Route::get('categories/{category}/articles/list', 'CategoryArticleAjaxController@index');
+    });
+
+/**
  * Admin Role
  */
 Route::middleware('admin')->prefix('admin')->namespace('Role')
