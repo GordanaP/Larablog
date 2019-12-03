@@ -2,10 +2,10 @@
 
 namespace App\ViewComposers;
 
-use App\Role;
+use App\User;
 use Illuminate\View\View;
 
-class RolesComposer
+class UsersCountComposer
 {
     /**
      * Bind data to the view.
@@ -15,7 +15,7 @@ class RolesComposer
     public function compose(View $view)
     {
         $view->with([
-            'roles' => Role::orderBy('name', 'asc')->get(),
+            'users_count' => User::count(),
         ]);
     }
 }

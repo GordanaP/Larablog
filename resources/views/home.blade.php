@@ -1,3 +1,3 @@
-@includeWhen(Auth::user()->is_admin, 'partials.pages._admin_home')
+@includeWhen(Auth::user()->is_admin, 'partials.pages._home_admin')
 
-@includeWhen(! Auth::user()->is_admin, 'partials.pages._member_home')
+@includeWhen(! Auth::user()->is_admin, 'partials.pages._home_member')

@@ -5,7 +5,7 @@
 @section('content')
     @include('alerts._error')
 
-    @header(['title' => 'Users', 'records_count' => \App\User::count()])
+    @header(['title' => 'Users', 'count' => $users_count])
         @addNew(['route' => route('admin.users.create')])
         @endaddNew
     @endheader

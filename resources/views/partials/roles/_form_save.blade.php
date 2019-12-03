@@ -1,12 +1,4 @@
-<form action="{{ $route }}" method="POST">
-
-    @csrf
-
-    @if (Request::route('role'))
-        @method('PUT')
-    @endif
-
-    @required @endrequired
+@form(['route' => $route, 'model' => 'role'])
 
     <div class="form-group">
         <label for="name">Name:@asterisks @endasterisks</label>
@@ -17,8 +9,7 @@
         @isInvalid(['field' => 'name']) @endisInvalid
     </div>
 
-    @buttonSubmit(['model' => 'role']) @endbuttonSubmit
-</form>
+@endform
 
 @section('scripts')
     <script>

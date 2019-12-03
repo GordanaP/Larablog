@@ -5,7 +5,7 @@
 @section('content')
     @include('alerts._error')
 
-    @header(['title' => 'Roles', 'records_count' => \App\Role::count()])
+    @header(['title' => 'Roles', 'count' => $roles_count])
         @addNew(['route' => route('admin.roles.create')])
         @endaddNew
     @endheader

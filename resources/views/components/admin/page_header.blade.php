@@ -3,9 +3,9 @@
         <h3 class="h4">
             <span>{{ ucfirst($title) }}</span>
 
-            @if (isset($records_count))
+            @if (isset($count))
                 <span class="text-2xl font-thin">
-                    ({{ $records_count }})
+                    ({{ $count }})
                 </span>
             @endif
         </h3>

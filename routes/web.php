@@ -14,14 +14,13 @@ Route::get('/admin', 'Admin\AdminPageController@index')
 /**
  * User
  */
-Route::resource('users', 'User\UserController')
+Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
-
 
 /**
  * Admin Role
  */
-Route::prefix('admin')->namespace('Role')
+Route::middleware('admin')->prefix('admin')->namespace('Role')
     ->group(function(){
         Route::get('roles/list', 'RoleAjaxController@index');
         Route::delete('roles/{role?}', 'RoleController@destroy')
@@ -40,7 +39,7 @@ Route::prefix('admin')->namespace('Role')
 /**
  * Admin User
  */
-Route::prefix('admin')->namespace('User')
+Route::middleware('admin')->prefix('admin')->namespace('User')
     ->group(function () {
         Route::get('users/list', 'UserAjaxController@index');
         Route::delete('users/{user?}', 'UserController@destroy')

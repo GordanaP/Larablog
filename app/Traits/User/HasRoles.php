@@ -17,36 +17,6 @@ trait HasRoles
     }
 
     /**
-     * Determine that the user is admin.
-     *
-     * @return bool
-     */
-    public function getIsAdminAttribute()
-    {
-        return $this->hasRole('admin');
-    }
-
-    /**
-     * Determine that the user is author.
-     *
-     * @return bool
-     */
-    public function getIsAuthorAttribute()
-    {
-        return $this->hasRole('author');
-    }
-
-    /**
-     * Determine that the user is member.
-     *
-     * @return bool
-     */
-    public function getIsMemberAttribute()
-    {
-        return $this->roles->isEmpty();
-    }
-
-    /**
      * Determine that the user has a specific role.
      *
      * @return bool

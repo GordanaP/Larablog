@@ -1,12 +1,4 @@
-<form action="{{ $route }}" method="POST" id="saveUser">
-
-    @csrf
-
-    @if (Request::route('user'))
-        @method('PUT')
-    @endif
-
-    @required @endrequired
+@form(['route' => $route, 'id' => 'saveUser', 'model' => 'user'])
 
     <!-- Roles -->
     @includeWhen(Auth::user()->is_admin, 'partials.users._roles_checkboxes')
@@ -61,8 +53,7 @@
         @endunless
     </div>
 
-    @buttonSubmit(['model' => 'user']) @endbuttonSubmit
-</form>
+@endform
 
 @section('scripts')
     @admin

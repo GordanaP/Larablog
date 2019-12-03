@@ -17,6 +17,9 @@ class Role extends Model
      */
     protected $fillable = [ 'name' ];
 
+    /**
+     * The "booting" method of the model.
+     */
     protected static function boot()
     {
         parent::boot();

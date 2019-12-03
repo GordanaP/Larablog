@@ -82,7 +82,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\User|null  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserRequest $request, User $user = null)

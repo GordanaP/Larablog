@@ -47,7 +47,7 @@ abstract class ManageDelete
     }
 
     /**
-     * Set the model's instance.
+     * Set the model instance.
      *
      * @param \App\Model $instance
      * @return self;

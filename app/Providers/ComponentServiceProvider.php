@@ -40,5 +40,6 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('components.error', 'isInvalid');
         Blade::component('components.asterisks', 'asterisks');
         Blade::component('components.required_fields', 'required');
+        Blade::component('components.form', 'form');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Role;
 use App\Role;
 use App\Facades\ManageRole;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 
@@ -84,7 +83,7 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Http\Requests\RoleRequest  $request
-     * @param  \App\Role  $role
+     * @param  \App\Role | null $role
      * @return \Illuminate\Http\Response
      */
     public function destroy(RoleRequest $request, Role $role = null)
