@@ -44,6 +44,16 @@
         </a>
     @endnavItemCollapsed
 
+    @navItemCollapsed(['id' => 'Tags', 'icon' => 'fa-tags'])
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.tags.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.tags.create') }}">
+            Add new
+        </a>
+    @endnavItemCollapsed
+
+
     <!-- Sidebar -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

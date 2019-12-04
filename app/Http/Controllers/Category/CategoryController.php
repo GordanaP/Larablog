@@ -18,7 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories_count = Category::count();
+
+        return view('categories.index', compact('categories_count'));
     }
 
     /**
@@ -83,6 +85,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Http\Requests\CategoryRequest  $request
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */

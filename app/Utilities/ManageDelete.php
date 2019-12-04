@@ -28,8 +28,7 @@ abstract class ManageDelete
      */
     final function remove()
     {
-        is_array($this->instance)
-            ? $this->deleteMany($this->instance)
+        is_array($this->instance) ? $this->deleteMany($this->instance)
             : $this->instance->delete();
     }
 

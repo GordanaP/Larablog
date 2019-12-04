@@ -18,6 +18,25 @@ Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
 
 /**
+ * Admin Tag
+ */
+Route::middleware('admin')->prefix('admin')->namespace('Tag')
+    ->group(function(){
+        Route::get('tags/list', 'TagAjaxController@index');
+        Route::delete('tags/{tag?}', 'TagController@destroy')
+            ->name('admin.tags.destroy');
+        Route::resource('tags', 'TagController', [
+            'parameters' => ['' => 'tag'],
+            'as' => 'admin'
+        ])->except('destroy');
+        // Route::resource('tags.articles', 'TagArticleController', [
+        //     'parameters' => ['' => 'tag'],
+        //     'as' => 'admin'
+        // ])->only('create');
+        // Route::get('tags/{tag}/articles/list', 'TagArticleAjaxController@index');
+    });
+
+/**
  * Admin Category
  */
 Route::middleware('admin')->prefix('admin')->namespace('Category')
