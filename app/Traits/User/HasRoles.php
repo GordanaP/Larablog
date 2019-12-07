@@ -39,4 +39,16 @@ trait HasRoles
     {
         $this->roles()->sync($roles);
     }
+
+    /**
+     * Get the authors.
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function scopeAuthors()
+    {
+        return static::with('roles')->whereHas('roles', function($query){
+            return $query->whereName('author');
+        });
+    }
 }

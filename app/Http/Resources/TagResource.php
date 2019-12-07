@@ -18,7 +18,7 @@ class TagResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'articles_count' => 'n/a',
+            'articles_count' => $this->articles->count(),
             'link' => [
                 'show' => route('admin.tags.show', $this),
                 'edit' => route('admin.tags.edit', $this),

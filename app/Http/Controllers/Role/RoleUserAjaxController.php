@@ -11,6 +11,7 @@ class RoleUserAjaxController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \App\Role $role
      * @return \Illuminate\Http\Response
      */
     public function index(Role $role)

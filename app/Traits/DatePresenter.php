@@ -27,4 +27,19 @@ trait DatePresenter
     {
         return Carbon::parse($value)->format('d M Y');
     }
+
+    public function getPublishAtFormattedAttribute()
+    {
+        return optional($this->publish_at)->format('Y-m-d');
+    }
+
+    public function getPublishAtReadableAttribute()
+    {
+        return optional($this->publish_at)->diffForHumans();
+    }
+
+    public function getPublishAtFromDBAttribute()
+    {
+        return optional($this->publish_at)->format('d M Y') ?? 'n/a';
+    }
 }

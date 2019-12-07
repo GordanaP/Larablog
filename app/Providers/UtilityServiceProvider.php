@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Utilities\ManageRole;
 use App\Utilities\ManageUser;
 use App\Utilities\RedirectTo;
+use App\Utilities\ManageArticle;
 use Illuminate\Support\ServiceProvider;
 
 class UtilityServiceProvider extends ServiceProvider
@@ -26,6 +26,10 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind('ManageArticle', function($app) {
+            return new ManageArticle;
+        });
+
         $this->app->bind('ManageUser', function($app) {
             return new ManageUser;
         });

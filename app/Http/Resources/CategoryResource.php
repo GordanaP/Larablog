@@ -18,7 +18,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'articles_count' => 'n/a',
+            'articles_count' => $this->articles->count(),
             'link' => [
                 'show' => route('admin.categories.show', $this),
                 'edit' => route('admin.categories.edit', $this),

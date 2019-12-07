@@ -49,4 +49,24 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = \Hash::make($value);
     }
+
+    /**
+     * The article that belongs to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function hasArticles()
+    {
+        return $this->articles->count();
+    }
+
+    public function addArticle($article)
+    {
+        return $this->articles()->save($article);
+    }
 }

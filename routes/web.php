@@ -18,6 +18,20 @@ Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
 
 /**
+ * Admin Article
+ */
+Route::middleware('admin')->prefix('admin')->namespace('Article')
+    ->group(function () {
+        Route::get('articles/list', 'ArticleAjaxController@index');
+        Route::delete('articles/{article?}', 'ArticleController@destroy')
+            ->name('admin.articles.destroy');
+        Route::resource('articles', 'ArticleController', [
+            'parameters' => ['' => 'article'],
+            'as' => 'admin'
+        ])->except('destroy');
+    });
+
+/**
  * Admin Tag
  */
 Route::middleware('admin')->prefix('admin')->namespace('Tag')
@@ -29,11 +43,11 @@ Route::middleware('admin')->prefix('admin')->namespace('Tag')
             'parameters' => ['' => 'tag'],
             'as' => 'admin'
         ])->except('destroy');
-        // Route::resource('tags.articles', 'TagArticleController', [
-        //     'parameters' => ['' => 'tag'],
-        //     'as' => 'admin'
-        // ])->only('create');
-        // Route::get('tags/{tag}/articles/list', 'TagArticleAjaxController@index');
+        Route::resource('tags.articles', 'TagArticleController', [
+            'parameters' => ['' => 'tag'],
+            'as' => 'admin'
+        ])->only('create');
+        Route::get('tags/{tag}/articles/list', 'TagArticleAjaxController@index');
     });
 
 /**
@@ -48,11 +62,25 @@ Route::middleware('admin')->prefix('admin')->namespace('Category')
             'parameters' => ['' => 'category'],
             'as' => 'admin'
         ])->except('destroy');
-        // Route::resource('categories.articles', 'CategoryArticleController', [
-        //     'parameters' => ['' => 'category'],
-        //     'as' => 'admin'
-        // ])->only('create');
-        // Route::get('categories/{category}/articles/list', 'CategoryArticleAjaxController@index');
+        Route::resource('categories.articles', 'CategoryArticleController', [
+            'parameters' => ['' => 'category'],
+            'as' => 'admin'
+        ])->only('create');
+        Route::get('categories/{category}/articles/list', 'CategoryArticleAjaxController@index');
+    });
+
+/**
+ * Admin User
+ */
+Route::middleware('admin')->prefix('admin')->namespace('User')
+    ->group(function () {
+        Route::get('users/list', 'UserAjaxController@index');
+        Route::delete('users/{user?}', 'UserController@destroy')
+            ->name('admin.users.destroy');
+        Route::resource('users', 'UserController', [
+            'parameters' => ['' => 'user'],
+            'as' => 'admin'
+        ])->except('destroy');
     });
 
 /**
@@ -72,18 +100,4 @@ Route::middleware('admin')->prefix('admin')->namespace('Role')
             'as' => 'admin'
         ])->only('create');
         Route::get('roles/{role}/users/list', 'RoleUserAjaxController@index');
-    });
-
-/**
- * Admin User
- */
-Route::middleware('admin')->prefix('admin')->namespace('User')
-    ->group(function () {
-        Route::get('users/list', 'UserAjaxController@index');
-        Route::delete('users/{user?}', 'UserController@destroy')
-            ->name('admin.users.destroy');
-        Route::resource('users', 'UserController', [
-            'parameters' => ['' => 'user'],
-            'as' => 'admin'
-        ])->except('destroy');
     });

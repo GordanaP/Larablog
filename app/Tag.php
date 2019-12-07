@@ -25,4 +25,14 @@ class Tag extends Model
     {
         return 'slug';
     }
+
+    /**
+     * The articles that belong to the tag.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }

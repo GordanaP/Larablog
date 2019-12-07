@@ -53,6 +53,14 @@
         </a>
     @endnavItemCollapsed
 
+    @navItemCollapsed(['id' => 'Articles', 'icon' => 'fa-database'])
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.articles.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.articles.create') }}">
+            Add new
+        </a>
+    @endnavItemCollapsed
 
     <!-- Sidebar -->
     <div class="text-center d-none d-md-inline">

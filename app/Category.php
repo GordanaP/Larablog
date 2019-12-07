@@ -26,4 +26,14 @@ class Category extends Model
         return 'slug';
     }
 
+    /**
+     * The article that belongs to the category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
 }

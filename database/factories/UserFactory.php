@@ -20,8 +20,13 @@ $factory->state(User::class, 'admin', [
     'email' => 'g@admin.com',
 ]);
 
-$factory->state(User::class, 'author', [
+$factory->state(User::class, 'author_1', [
     'name' => 'darko',
     'email' => 'd@author.com',
+]);
+
+$factory->state(User::class, 'author_2', [
+    'name' => 'boka',
+    'email' => 'b@author.com',
 ]);
 

@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -232,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'RedirectTo' => App\Facades\RedirectTo::class,
         'ManageUser' => App\Facades\ManageUser::class,
+        'ManageArticle' => App\Facades\ManageArticle::class,
     ],
 
 ];

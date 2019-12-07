@@ -1,11 +1,11 @@
 <div class="form-group">
     <label for="role" class="mr-3"> Role:</label>
     @if ($role = Request::route('role'))
-        @checkbox(['role' => $role])
+        @checkbox(['name'=>'role', 'model' => $role])
         @endcheckbox
     @else
         @foreach ($roles as $role)
-            @checkbox(['role' => $role])
+            @checkbox(['name'=>'role', 'model' => $role])
                 @if ($ids = old('role_id', isset($user) ? $user->roles->pluck('id') : null))
                     @foreach ($ids as $role_id)
                         {{ getChecked($role->id, $role_id) }}
