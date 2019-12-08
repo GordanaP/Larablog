@@ -18,6 +18,25 @@ Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
 
 /**
+ * Admin Profile
+ */
+Route::middleware('admin')->prefix('admin')->namespace('Profile')
+    ->group(function () {
+        Route::get('profiles/list', 'ProfileAjaxController@index');
+        Route::delete('profiles/{profile?}', 'ProfileController@destroy')
+            ->name('admin.profiles.destroy');
+        Route::resource('profiles', 'ProfileController', [
+            'parameters' => ['' => 'profile'],
+            'as' => 'admin'
+        ])->except('destroy');
+        Route::resource('profiles.articles', 'ProfileArticleController', [
+            'parameters' => ['' => 'profile'],
+            'as' => 'admin'
+        ])->only('create');
+        Route::get('/profiles/{profile}/articles/list', 'ProfileArticleAjaxController@index');
+    });
+
+/**
  * Admin Article
  */
 Route::middleware('admin')->prefix('admin')->namespace('Article')

@@ -18,7 +18,7 @@ $factory->define(Article::class, function (Faker $faker) {
         })->inRandomOrder()->first()->id,
         'category_id' => Category::inRandomOrder()->first()->id,
         'created_at'=> $created_at = $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now'),
-        'publish_at'=> Carbon::parse($created_at)->addMonths(random_int(1,3)),
-        'is_approved' => rand(0, 1),
+        'is_approved' => $is_approved = rand(0, 1),
+        'publish_at'=> $is_approved == 1 ? Carbon::parse($created_at)->addMonths(random_int(1,3)) : null,
     ];
 });

@@ -47,7 +47,7 @@ trait HasRoles
      */
     public function scopeAuthors()
     {
-        return static::with('roles')->whereHas('roles', function($query){
+        return static::with('roles', 'profile')->whereHas('roles', function($query){
             return $query->whereName('author');
         });
     }

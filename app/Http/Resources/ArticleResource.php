@@ -18,7 +18,7 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            'author' => $this->user->email,
+            'author' => $this->user->profile->full_name,
             'status' => $this->getStatus()['name'],
             'color' => $this->getStatus()['color'],
             'icon' => $this->getStatus()['icon'],
@@ -26,7 +26,7 @@ class ArticleResource extends JsonResource
             'link' => [
                 'show' => route('admin.articles.show', $this),
                 'edit' => route('admin.articles.edit', $this),
-                'show_author' => '#',
+                'show_author' => route('admin.profiles.show', $this->user->profile),
             ]
         ];
     }

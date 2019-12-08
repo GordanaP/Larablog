@@ -21,8 +21,8 @@
 @endrowInfo
 
 @rowInfo(['name' => 'Author'])
-    <a href="#">
-        {{ $article->user->email }}
+    <a href="{{ route('admin.profiles.show', $article->user->profile) }}">
+        {{ $article->user->profile->full_name }}
     </a>
 @endrowInfo
 

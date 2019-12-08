@@ -33,6 +33,15 @@
         </a>
     @endnavItemCollapsed
 
+    @navItemCollapsed(['id' => 'Profiles', 'icon' => 'fa-user-circle'])
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.profiles.index') }}">
+            View all
+        </a>
+        <a class="collapse-item px-0 py-1" href="{{ route('admin.profiles.create') }}">
+            Add new
+        </a>
+    @endnavItemCollapsed
+
     <hr class="sidebar-divider mt-1">
 
     @navItemCollapsed(['id' => 'Categories', 'icon' => 'fa-share-alt'])

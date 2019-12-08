@@ -2,7 +2,7 @@
     <a class="nav-link collapsed px-3 py-1" href="#" data-toggle="collapse"
     data-target="#collapse{{ $id }}" aria-expanded="true"
     aria-controls="collapse{{ $id }}">
-        <i class="fas fa-fw {{ $icon }}"></i>
+        <i class="fas {{ $icon }}"></i>
         <span>{{ $id }}</span>
     </a>
 

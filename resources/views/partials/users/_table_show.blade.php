@@ -15,3 +15,11 @@
         Member
     @endforelse
 @endrowInfo
+
+@author($user)
+    @rowInfo(['name' => 'Author profile'])
+        <a href="{{ route('admin.profiles.show', $user->profile) }}">
+            {{ $user->profile->full_name }}
+        </a>
+    @endrowInfo
+@endauthor

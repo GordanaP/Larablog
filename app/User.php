@@ -51,22 +51,63 @@ class User extends Authenticatable
     }
 
     /**
-     * The article that belongs to the user.
+     * The articles that belong to the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
 
+    /**
+     * Determine if the user has articles.
+     *
+     * @return boolean
+     */
     public function hasArticles()
     {
         return $this->articles->count();
     }
 
+    /**
+     * Add article to the user.
+     *
+     * @param \App\Article $article
+     */
     public function addArticle($article)
     {
-        return $this->articles()->save($article);
+        // return $this->articles()->save($article);
+        $this->articles()->save($article);
+    }
+
+    /**
+     * The profile that belongs to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    /**
+     * Deterine if the user has profle.
+     *
+     * @return boolean
+     */
+    public function hasProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Add the profile to the user.
+     *
+     * @param \App\Profile $profile
+     */
+    public function addProfile($profile)
+    {
+        $this->profile()->save($profile);
     }
 }
