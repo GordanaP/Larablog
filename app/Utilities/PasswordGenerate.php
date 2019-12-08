@@ -4,20 +4,21 @@ namespace App\Utilities;
 
 use App\Utilities\RadioInput;
 
-class ArticleApprovalStatus extends RadioInput
+class PasswordGenerate extends RadioInput
 {
     /**
      * { @inheritDocs }
      */
-    public $radio_inputs = [
-        'yes' => 1,
-        'no' => 0,
-    ];
+    public $name = 'generate_password';
 
     /**
      * { @inheritDocs }
      */
-    public $radio_name = 'is_approved';
+    public $inputs = [
+        'Do not change' => 'do_not_change',
+        'Auto password' => 'auto_generate',
+        'Manual password' => 'manually_generate',
+    ];
 
     /**
      * Get the new instance of the class.

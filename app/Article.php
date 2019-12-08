@@ -37,6 +37,10 @@ class Article extends Model
         'is_approved' => 'boolean',
     ];
 
+    protected $appends = [
+        'publish_at_formatted',
+    ];
+
     /**
      * Get the route key for the model.
      *

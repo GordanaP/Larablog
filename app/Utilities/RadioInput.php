@@ -5,18 +5,19 @@ namespace App\Utilities;
 class RadioInput
 {
     /**
-     * The radio input values.
-     *
-     * @var array
-     */
-    public $radio_inputs = [];
-
-    /**
      * The radio input name.
      *
      * @var string
      */
-    public $radio_name;
+    public $name;
+
+    /**
+     * The radio input values.
+     *
+     * @var array
+     */
+    public $inputs = [];
+
 
     /**
      * Get all radio inputs.
@@ -25,7 +26,7 @@ class RadioInput
      */
     public function all()
     {
-        return $this->radio_inputs;
+        return $this->inputs;
     }
 
     /**

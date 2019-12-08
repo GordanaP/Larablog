@@ -58,11 +58,14 @@
 @section('scripts')
     @admin
         <script>
-            var user = "{{ Request::route('user') }}";
-            var form = $('#saveUser');
-            var manualPassword = $('#manualPassword');
-            var autoPassword = $('#autoPassword');
-            var doNotChangePassword = $('#doNotChangePassword');
+
+            var passwordRadioIds = @json($password_radio_ids);
+            var passwordRadio = @json($password_radio_name);
+
+            var userExists = "{{ Request::route('user') }}";
+            var doNotChangePassword = createById(passwordRadioIds[0]);
+            var autoPassword = createById(passwordRadioIds[1]);
+            var manualPassword = createById(passwordRadioIds[2]);
             var hiddenInput = $('#password');
             var hiddenError = $('p.password');
 
@@ -70,9 +73,9 @@
 
             hiddenInput.hide();
 
-            user ? check(doNotChangePassword) : check(autoPassword);
+            userExists ? check(doNotChangePassword) : check(autoPassword);
 
-            toggleHidden(radioName(form), optionValue(manualPassword), hiddenInput, hiddenError)
+            toggleHidden(passwordRadio, manualPassword, hiddenInput, hiddenError)
 
         </script>
     @endadmin

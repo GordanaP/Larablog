@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Rules\IsAuthor;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\IsDeterminedForApprovedArticleOnly;
 
 class ArticleRequest extends FormRequest
 {
@@ -44,7 +45,8 @@ class ArticleRequest extends FormRequest
             'is_approved' => 'sometimes|required|boolean',
             'publish_at' => [
                 'nullable','required_if:is_approved,1', 'date_format:Y-m-d',
-                'after:'.Carbon::yesterday()
+                'after_or_equal:'.today(),
+                new IsDeterminedForApprovedArticleOnly($this->is_approved)
             ],
         ];
     }

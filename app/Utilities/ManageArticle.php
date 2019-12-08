@@ -78,7 +78,20 @@ class ManageArticle extends ManageDelete
      */
     private function fromForm($data)
     {
-        return (new Article)->fill($data)
+        return (new Article)->fill($this->filtered($data))
             ->assignAuthor($this->author);
+    }
+
+    /**
+     * Remove empty values.
+     *
+     * @param  array $data
+     * @return array
+     */
+    private function filtered($data)
+    {
+        return collect($data)->reject(function($value){
+            return $value == null;
+        })->toArray();
     }
 }

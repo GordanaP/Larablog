@@ -1,18 +1,18 @@
-function toggleHidden(radioName, radioValue, hiddenElement, hiddenError)
+function toggleHidden(radioName, radioValue, hiddenInput, hiddenError, hiddenElement = null)
 {
     radioInput(radioName).change(function() {
 
-        if(isCheckedRadioValue(radioName, radioValue)) {
-            hiddenElement.show()
+        if(isCheckedRadioValue(radioName, radioValue.val())) {
+            hiddenElement ? hiddenElement.show() : hiddenInput.show()
         } else {
-            hiddenElement.hide()
-            resetInput(hiddenElement)
+            hiddenElement ? hiddenElement.hide() : hiddenInput.hide()
+            resetInput(hiddenInput)
             emptyElement(hiddenError)
         }
     });
 
     if (! isEmptyElement( hiddenError )) {
-        hiddenElement.show();
+        hiddenElement ? hiddenElement.show() : hiddenInput.show()
         check($('input[value="'+ radioValue +'"]'));
     }
 }

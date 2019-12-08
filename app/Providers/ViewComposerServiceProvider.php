@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\View;
 use App\ViewComposers\AuthorsComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\CategoriesComposer;
-use App\ViewComposers\Article\ApprovalStatusesComposer;
+use App\ViewComposers\PasswordGenerateComposer;
+use App\ViewComposers\Article\IsApprovedComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -29,10 +30,11 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('partials.users._form_save', PasswordGenerateComposer::class);
         View::composer('partials.users._roles_checkboxes', RolesComposer::class);
         View::composer('partials.articles._form_save', CategoriesComposer::class);
         View::composer('partials.articles._form_save', TagsComposer::class);
-        View::composer('partials.articles._form_save', ApprovalStatusesComposer::class);
+        View::composer('partials.articles._form_save', IsApprovedComposer::class);
         View::composer('partials.articles._authors_select_box', AuthorsComposer::class);
     }
 }

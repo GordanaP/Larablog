@@ -93,14 +93,14 @@
 
     <!-- Approval -->
     <div class="form-group">
-        <p class="mb-1">Approve publishing: @asterisks @endasterisks</p>
+            <p class="mb-1">Approve publishing: @asterisks @endasterisks</p>
 
-            @foreach ($approval_statuses as $key => $value)
-                @radio(['name' => $approval_radio, 'id' => $key, 'value' => $value])
+            @foreach ($approval_radio_inputs as $key => $value)
+                @radio(['name' => $approval_radio_name, 'id' => Str::camel($value), 'value' => $value])
                     @slot('is_checked')
                         {{ getChecked($value, old('is_approved', $article->is_approved ?? null)) }}
                     @endslot
-                    {{ array_search($value, $approval_statuses) }}
+                    {{ $key }}
                 @endradio
             @endforeach
 
@@ -108,11 +108,11 @@
     </div>
 
     <!-- Publish At -->
-    <div class="form-group">
+    <div class="form-group" id="hidePublishAt">
         <label for="publish_at">Publishing Date:</label>
         <input type="text" name="publish_at" id="publish_at"
         class="form-control" placeholder="yyyy-mm-dd"
-        value="{{ old('publish_at', $article->publish_at_formatted ?? null) }}">
+        value="{{ old('publish_at') }}">
 
         @isInvalid(['field' => 'publish_at']) @endisInvalid
     </div>
@@ -145,6 +145,33 @@
                 }
             }
         });
+
+        var isApprovedRadioIds = @json($approval_radio_ids);
+        var isApprovedRadio = @json($approval_radio_name);
+
+        var article = @json($article = Request::route('article'));
+        var publishDateExists = article && article.publish_at;
+        var publishDate = publishDateExists ? article.publish_at_formatted : '';
+
+        var isApproved = createById(isApprovedRadioIds[0]);
+        var isNotApproved = createById(isApprovedRadioIds[1]);
+        var hiddenElement = $('#hidePublishAt');
+        var hiddenInput = $('#publish_at');
+        var hiddenError = $('p.publish_at');
+
+        clearErrorOnNewInput();
+
+        if(isCheckedRadioValue(isApprovedRadio, isApproved.val()) && publishDateExists) {
+            hiddenElement.show()
+            hiddenInput.val(publishDate);
+        }
+
+        if(isCheckedRadioValue(isApprovedRadio, isNotApproved.val()) && isEmptyElement(hiddenError)) {
+            hiddenElement.hide()
+        }
+
+        toggleHidden(isApprovedRadio, isApproved, hiddenInput, hiddenError, hiddenElement)
+
     </script>
 @endsection
 
