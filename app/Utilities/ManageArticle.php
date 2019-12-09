@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Request;
 
 class ManageArticle extends ManageDelete
 {
+    private $article;
+
     /**
      * The author.
      *
@@ -29,8 +31,9 @@ class ManageArticle extends ManageDelete
      */
     public function __construct()
     {
-        $this->model = 'App\Article';
-        $this->article  = Request::route('article') ?? request('ids');
+        $this->model = Article::class;
+        $this->instance  = Request::route('article') ?? request('ids');
+        $this->article = Request::isMethod('POST') ? new $this->model : $this->instance;
         $this->author  = Request::route('user') ?? User::find(request('user_id'));
         $this->tags = request('tag_id');
     }
@@ -47,6 +50,7 @@ class ManageArticle extends ManageDelete
         $article->addTags($this->tags);
 
         return $article;
+
     }
 
     /**
@@ -56,8 +60,9 @@ class ManageArticle extends ManageDelete
      */
     public function update($data)
     {
-        tap($this->article)->update($data)
-            ->addTags($this->tags);
+        $article = $this->fromForm($data);
+
+        $article->addTags($this->tags);
     }
 
     /**
@@ -66,7 +71,7 @@ class ManageArticle extends ManageDelete
     public function delete()
     {
         $this->setModel($this->model)
-            ->setInstance($this->article)
+            ->setInstance($this->instance)
             ->remove();
     }
 
@@ -78,8 +83,9 @@ class ManageArticle extends ManageDelete
      */
     private function fromForm($data)
     {
-        return (new Article)->fill($this->filtered($data))
-            ->assignAuthor($this->author);
+        return $this->article->fill($data)->assignAuthor($this->author);
+        // return ($this->model)->fill($this->filtered($data))
+        //     ->assignAuthor($this->author);
     }
 
     /**

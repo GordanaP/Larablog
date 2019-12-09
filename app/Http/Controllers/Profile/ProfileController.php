@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\Http\Controllers\Controller;
 use App\Profile;
+use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
+use App\Facades\ManageProfile;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -27,18 +30,20 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('profiles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProfileRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-        //
+        $profile = ManageProfile::create($request->all());
+
+        return RedirectTo::route('profiles', $profile);
     }
 
     /**
@@ -60,29 +65,34 @@ class ProfileController extends Controller
      */
     public function edit(Profile $profile)
     {
-        //
+        return view('profiles.edit', compact('profile'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProfileRequest  $request
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(ProfileRequest $request, Profile $profile)
     {
-        //
+        ManageProfile::update($request->all());
+
+        return RedirectTo::route('profiles', $profile);
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Http\Requests\ProfileRequest  $request
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy(ProfileRequest $request, Profile $profile = null)
     {
-        //
+        ManageProfile::delete();
+
+        return RedirectTo::route('profiles');
     }
 }

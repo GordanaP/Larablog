@@ -233,6 +233,7 @@ return [
         'RedirectTo' => App\Facades\RedirectTo::class,
         'ManageUser' => App\Facades\ManageUser::class,
         'ManageArticle' => App\Facades\ManageArticle::class,
+        'ManageProfile' => App\Facades\ManageProfile::class,
     ],
 
 ];

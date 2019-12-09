@@ -50,5 +50,16 @@ trait HasRoles
         return static::with('roles', 'profile')->whereHas('roles', function($query){
             return $query->whereName('author');
         });
+
+    }
+
+    /**
+     * The authors without profiles.
+     *
+     * @return Illuminate\Suppot\Colesction
+     */
+    public function scopeAuthorsWithoutProfile()
+    {
+        return static::authors()->whereDoesntHave('profile');
     }
 }

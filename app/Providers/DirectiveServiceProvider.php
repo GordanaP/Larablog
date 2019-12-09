@@ -26,7 +26,7 @@ class DirectiveServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('author', function ($user) {
-            return optional($user->load('roles'))->is_author;
+            return optional(optional($user)->load('roles'))->is_author;
         });
 
         Blade::if('admin', function () {

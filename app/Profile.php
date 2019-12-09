@@ -35,4 +35,17 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Assign the user acccount to the profile.
+     *
+     * @param  \App\User $user
+     * @return \App\Profile
+     */
+    public function assignAuthor($user)
+    {
+        $this->user()->associate($user)->save();
+
+        return $this;
+    }
 }

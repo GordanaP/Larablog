@@ -2,12 +2,14 @@
 
 namespace App\Utilities;
 
+use Illuminate\Support\Facades\Request;
+
 abstract class ManageDelete
 {
     /**
-     * The model name.
+     * The model.
      *
-     * @var string
+     * @var \App\Model
      */
     private $model;
 
@@ -24,7 +26,7 @@ abstract class ManageDelete
     protected abstract function delete();
 
     /**
-     * Delete the record.
+     * Delete one or many records.
      */
     final function remove()
     {

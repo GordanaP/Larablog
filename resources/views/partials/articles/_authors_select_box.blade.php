@@ -11,7 +11,7 @@
                 <option value="{{ $author->id }}"
                     {{ getSelected($author->id, old('user_id', $article->user_id ?? null)) }}
                 >
-                    {{ $author->profile->full_name}}
+                    {{ optional($author->profile)->full_name}}
                 </option>
             @endforeach
         @endif
