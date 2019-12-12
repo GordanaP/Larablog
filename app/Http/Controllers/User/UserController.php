@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
-use App\Facades\ManageUser;
 use App\Facades\RedirectTo;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Services\ManageUrl\Redirect;
+use App\Services\ManageModel\UserManager;
 
 class UserController extends Controller
 {
@@ -40,7 +41,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = ManageUser::create($request->validated());
+        $user = UserManager::get($request->validated())->save();
 
         return RedirectTo::route('users', $user);
     }
@@ -76,7 +77,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        ManageUser::update($request->validated());
+        UserManager::get($request->validated())->save();
 
         return RedirectTo::route('users', $user);
     }
@@ -90,7 +91,7 @@ class UserController extends Controller
      */
     public function destroy(UserRequest $request, User $user = null)
     {
-        ManageUser::delete();
+        UserManager::get($user ?? $request->validated()['ids'])->remove();
 
         return RedirectTo::route('users');
     }

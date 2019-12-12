@@ -1,4 +1,4 @@
-@form(['route' => $route, 'id' => 'saveProfile', 'model' => 'profile'])
+@form(['route' => $route, 'model' => 'profile', 'id' => 'saveProfile', 'hasImage' => true])
 
     <!-- Roles -->
     @includeWhen(Auth::user()->is_admin, 'partials.profiles._authors_select_box')
@@ -29,6 +29,24 @@
         placeholder="Biography">{{ old('biography', $profile->biography ?? null) }}</textarea>
 
         @isInvalid(['field' => 'biography'])@endisInvalid
+    </div>
+
+    <!-- Avatar -->
+    <div class="flex form-group mt-3">
+        <div>
+            <label for="avatar">Upload avatar:</label>
+            <input type="file" name="avatar" id="avatar"
+            class="form-control-file">
+
+            @isInvalid(['field' => 'avatar'])@endisInvalid
+        </div>
+
+        @if (optional($profile ?? null)->hasAvatar())
+            <div class="w-1/4">
+                <img src="{{ ProfileImage::getUrl($profile->avatar) }}"
+                alt="Profile Avatar">
+            </div>`
+        @endif
     </div>
 @endform
 

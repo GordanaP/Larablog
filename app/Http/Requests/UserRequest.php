@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
+use App\Utilities\GeneratePassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -40,11 +41,11 @@ class UserRequest extends FormRequest
 
         if(Auth::user()->is_admin) {
             $rules['role_id'] = ['sometimes', 'exists:roles,id' ];
-            $rules['generate_password'] = [
+            $rules[GeneratePassword::get()->name] = [
                 'sometimes', 'required',
-                Rule::in(['auto_generate', 'manually_generate', 'do_not_change'])
+                Rule::in(GeneratePassword::get()->values())
             ];
-            if($this->generate_password == 'manually_generate') {
+            if($this->generatePassword() == 'manually_generate') {
                 $rules['password'] = ['required', 'min:8'];
             }
         }
@@ -54,5 +55,12 @@ class UserRequest extends FormRequest
         }
 
         return $rules;
+    }
+
+    private function generatePassword()
+    {
+        $radioName = GeneratePassword::get()->name;
+
+        return $this->$radioName;
     }
 }

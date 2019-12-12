@@ -35,9 +35,9 @@ trait HasRoles
      *
      * @param mixed $roles
      */
-    public function addRoles($roles)
+    public function assignRoles($roles)
     {
-        $this->roles()->sync($roles);
+        return $this->roles()->sync($roles);
     }
 
     /**

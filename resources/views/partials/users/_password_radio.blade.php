@@ -9,3 +9,5 @@
     @endradio
 
 @endforeach
+
+@isInvalid(['field' => $password_radio_name]) @endisInvalid

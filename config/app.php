@@ -231,9 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'RedirectTo' => App\Facades\RedirectTo::class,
-        'ManageUser' => App\Facades\ManageUser::class,
-        'ManageArticle' => App\Facades\ManageArticle::class,
-        'ManageProfile' => App\Facades\ManageProfile::class,
+        'ArticleImage' => App\Facades\ArticleImage::class,
+        'ProfileImage' => App\Facades\ProfileImage::class,
     ],
 
 ];

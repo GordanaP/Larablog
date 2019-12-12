@@ -2,11 +2,10 @@
 
 namespace App\Providers;
 
-use App\Utilities\ManageUser;
-use App\Utilities\RedirectTo;
-use App\Utilities\ManageArticle;
-use App\Utilities\ManageProfile;
+use App\Services\ManageUrl\RedirectTo;
 use Illuminate\Support\ServiceProvider;
+use App\Services\ManageImage\ArticleImage;
+use App\Services\ManageImage\ProfileImage;
 
 class UtilityServiceProvider extends ServiceProvider
 {
@@ -27,16 +26,12 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind('ManageProfile', function($app) {
-            return new ManageProfile;
+        $this->app->bind('ProfileImage', function($app){
+            return new ProfileImage;
         });
 
-        $this->app->bind('ManageArticle', function($app) {
-            return new ManageArticle;
-        });
-
-        $this->app->bind('ManageUser', function($app) {
-            return new ManageUser;
+        $this->app->bind('ArticleImage', function($app){
+            return new ArticleImage;
         });
 
         $this->app->bind('RedirectTo', function($app) {

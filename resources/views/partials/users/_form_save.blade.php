@@ -33,14 +33,14 @@
 
         @includeWhen(Auth::user()->is_admin, 'partials.users._password_radio')
 
+        {{-- @admin
+            @isInvalid(['field' => 'generate_password']) @endisInvalid
+        @endadmin --}}
+
         <input type="password" class="form-control mt-2"
         id="password" name="password" placeholder="********" >
 
         @isInvalid(['field' => 'password'])@endisInvalid
-
-        @admin
-            @isInvalid(['field' => 'generate_password']) @endisInvalid
-        @endadmin
 
         <!-- Password confirm -->
         @unless(Auth::user()->is_admin)

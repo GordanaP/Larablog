@@ -74,7 +74,7 @@
     </div>
 
     <!-- Image -->
-    {{-- <div class="flex form-group mt-3">
+    <div class="flex form-group mt-3">
         <div>
             <label for="image">Upload image</label>
             <input type="file" name="image" id="image"
@@ -85,11 +85,11 @@
 
         @if (isset($article) && $article->hasImage())
             <div class="w-1/4">
-                <img src="{{ ArticleImageService::getUrl($article->image) }}"
+                <img src="{{ ArticleImage::getUrl($article->image) }}"
                 alt="Article Image">
             </div>
         @endif
-    </div> --}}
+    </div>
 
     <!-- Approval -->
     <div class="form-group">

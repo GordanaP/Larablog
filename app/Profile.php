@@ -48,4 +48,24 @@ class Profile extends Model
 
         return $this;
     }
+
+    /**
+     * The avatar that belongs to the profile.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function avatar()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * Determine if the profile has an avatar.
+     *
+     * @return boolean
+     */
+    public function hasAvatar()
+    {
+        return $this->avatar;
+    }
 }

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Profile;
 
 use App\Profile;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
-use App\Http\Requests\ProfileRequest;
-use App\Facades\ManageProfile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
+use App\Services\ManageModel\ProfileManager;
 
 class ProfileController extends Controller
 {
@@ -41,7 +40,7 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $profile = ManageProfile::create($request->all());
+        $profile = ProfileManager::get($request->validated())->save();
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -77,7 +76,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        ManageProfile::update($request->all());
+        ProfileManager::get($request->validated())->save();
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -86,12 +85,12 @@ class ProfileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Http\Requests\ProfileRequest  $request
-     * @param  \App\Profile  $profile
+     * @param  \App\Profile|null $profile
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProfileRequest $request, Profile $profile = null)
     {
-        ManageProfile::delete();
+        ProfileManager::get($request->validated()['ids'])->remove();
 
         return RedirectTo::route('profiles');
     }

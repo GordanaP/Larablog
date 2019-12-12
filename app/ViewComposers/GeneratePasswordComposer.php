@@ -4,9 +4,9 @@ namespace App\ViewComposers;
 
 use Illuminate\View\View;
 use Illuminate\Support\Str;
-use App\Utilities\PasswordGenerate;
+use App\Utilities\GeneratePassword;
 
-class PasswordGenerateComposer
+class GeneratePasswordComposer
 {
     /**
      * Bind data to the view.
@@ -16,9 +16,9 @@ class PasswordGenerateComposer
     public function compose(View $view)
     {
         $view->with([
-            'password_radio_name' => PasswordGenerate::get()->name,
-            'password_radio_inputs' => PasswordGenerate::get()->all(),
-            'password_radio_ids' => collect(PasswordGenerate::get()->values())
+            'password_radio_name' => GeneratePassword::get()->name,
+            'password_radio_inputs' => GeneratePassword::get()->all(),
+            'password_radio_ids' => collect(GeneratePassword::get()->values())
                 ->map(function($value){
                     return Str::camel($value);
                 })

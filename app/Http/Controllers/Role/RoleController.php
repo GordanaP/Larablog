@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Role;
 
 use App\Role;
 use App\Facades\RedirectTo;
-use App\Utilities\ManageRole;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
+use App\Services\ManageModel\RoleManager;
 
 class RoleController extends Controller
 {
@@ -90,7 +90,7 @@ class RoleController extends Controller
      */
     public function destroy(RoleRequest $request, Role $role = null)
     {
-        ManageRole::get()->delete();
+        RoleManager::get($role ?? $request->validated()['ids'])->remove();
 
         return RedirectTo::route('roles');
     }

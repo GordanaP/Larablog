@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utilities;
+namespace App\Services\ManageUrl;
 
 use Illuminate\Support\Str;
 

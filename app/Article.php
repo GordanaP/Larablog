@@ -104,4 +104,24 @@ class Article extends Model
 
         return $this;
     }
+
+    /**
+     * The image that belongs to the article
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * Determine if the article has an image.
+     *
+     * @return boolean
+     */
+    public function hasImage()
+    {
+        return $this->image;
+    }
 }

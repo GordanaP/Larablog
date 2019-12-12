@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Article;
 
 use App\Article;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
-use App\Facades\ManageArticle;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use App\Services\ManageModel\ArticleManager;
 
 class ArticleController extends Controller
 {
@@ -41,7 +40,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $article = ManageArticle::create($request->validated());
+        $article = ArticleManager::get($request->validated())->save();
 
         return RedirectTo::route('articles', $article);
     }
@@ -77,7 +76,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-        ManageArticle::update($request->all());
+        ArticleManager::get($request->validated())->save();
 
         return RedirectTo::route('articles', $article);
     }
@@ -91,7 +90,7 @@ class ArticleController extends Controller
      */
     public function destroy(ArticleRequest $request, Article $article = null)
     {
-        ManageArticle::delete();
+        ArticleManager::get($article ?? $request->validated()['ids'])->remove();
 
         return RedirectTo::route('articles', $article);
     }

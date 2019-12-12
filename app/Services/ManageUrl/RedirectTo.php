@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Utilities;
+namespace App\Services\ManageUrl;
 
 use Illuminate\Support\Str;
-use App\Utilities\RedirectRoute;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ManageUrl\RedirectRoute;
 
 class RedirectTo extends RedirectRoute
 {

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
-use App\Utilities\ManageCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Services\ManageModel\CategoryManager;
 
 class CategoryController extends Controller
 {
@@ -91,7 +90,7 @@ class CategoryController extends Controller
      */
     public function destroy(CategoryRequest $request, Category $category = null)
     {
-        ManageCategory::get()->delete();
+        CategoryManager::get($category ?? $request->validated()['ids'])->remove();
 
         return RedirectTo::route('categories');
     }

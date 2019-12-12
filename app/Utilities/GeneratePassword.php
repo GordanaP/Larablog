@@ -4,7 +4,7 @@ namespace App\Utilities;
 
 use App\Utilities\RadioInput;
 
-class PasswordGenerate extends RadioInput
+class GeneratePassword extends RadioInput
 {
     /**
      * { @inheritDocs }

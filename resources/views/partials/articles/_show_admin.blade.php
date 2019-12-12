@@ -57,14 +57,13 @@
     @endforelse
 @endrowInfo
 
-{{-- @rowInfo(['name' => 'Image'])
+@rowInfo(['name' => 'Image'])
     @if ($article->hasImage())
         <div class="w-1/2">
-            <img src="{{ ArticleImageService::getUrl($article->image) }}"
+            <img src="{{ ArticleImage::getUrl($article->image) }}"
             alt="{{ $article->title }}" class="img-thumbnail">
         </div>
     @else
         n/a
     @endif
 @endrowInfo
- --}}

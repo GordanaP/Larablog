@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Tag;
 
 use App\Tag;
 use App\Facades\RedirectTo;
-use App\Utilities\ManageTag;
 use App\Http\Requests\TagRequest;
 use App\Http\Controllers\Controller;
+use App\Services\ManageModel\TagManager;
 
 class TagController extends Controller
 {
@@ -90,7 +90,7 @@ class TagController extends Controller
      */
     public function destroy(TagRequest $request, Tag $tag = null)
     {
-        ManageTag::get()->delete();
+        TagManager::get($tag ?? $request->validated()['ids'])->remove();
 
         return RedirectTo::route('tags', $tag);
     }
