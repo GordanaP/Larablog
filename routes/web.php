@@ -18,6 +18,13 @@ Route::middleware('account.owner')->resource('users', 'User\UserController')
     ->only('show','edit', 'update', 'destroy');
 
 /**
+ * Profile
+ */
+Route::resource('profiles', 'Profile\ProfileController')
+    ->only('show','edit', 'update');
+
+
+/**
  * Admin Profile
  */
 Route::middleware('admin')->prefix('admin')->namespace('Profile')

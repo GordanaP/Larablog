@@ -49,6 +49,12 @@
                                 href="{{ route('users.edit', Auth::user() ?? null) }}">
                                 Account settings
                             </a>
+                            @author(Auth::user())
+                                <a class="dropdown-item"
+                                    href="{{ route('profiles.edit', Auth::user()->profile ?? null) }}">
+                                    Edit profile
+                                </a>
+                            @endauthor
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

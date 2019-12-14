@@ -42,7 +42,7 @@ class UserRequest extends FormRequest
 
         if(Auth::user()->is_admin) {
             $rules['role_id'] = ['sometimes', 'exists:roles,id' ];
-            $rules[GeneratePassword::get()->button_name] = [
+            $rules[GeneratePassword::get()->name] = [
                 'sometimes', 'required',
                 Rule::in(GeneratePassword::get()->values())
             ];

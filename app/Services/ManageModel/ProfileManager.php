@@ -35,7 +35,7 @@ class ProfileManager extends Delete
 
     private function fromForm($data)
     {
-        return $this->profile->fill($data)
-            ->assignAuthor($this->author);
+       return $this->author ? $this->profile->fill($data)->assignAuthor($this->author)
+        : tap($this->profile)->update($data);
     }
 }

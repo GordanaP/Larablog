@@ -13,6 +13,7 @@
         @isInvalid(['field' => 'first_name']) @endisInvalid
     </div>
 
+    <!-- Last Name -->
     <div class="form-group">
         <label for="last_name">Last name:@asterisks @endasterisks</label>
         <input type="text" name="last_name" id="last_name"
@@ -49,4 +50,3 @@
         @endif
     </div>
 @endform
-

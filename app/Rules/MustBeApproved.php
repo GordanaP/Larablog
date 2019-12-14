@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class IsDeterminedForApprovedArticleOnly implements Rule
+class MustBeApproved implements Rule
 {
     public $is_approved;
 

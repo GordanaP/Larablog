@@ -7,7 +7,7 @@ use App\Rules\IsAuthor;
 use App\Utilities\SubmitForm;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\IsDeterminedForApprovedArticleOnly;
+use App\Rules\MustBeApproved;
 
 class ArticleRequest extends FormRequest
 {
@@ -47,7 +47,7 @@ class ArticleRequest extends FormRequest
             'publish_at' => [
                 'nullable','required_if:is_approved,1', 'date_format:Y-m-d',
                 'after_or_equal:'.today(),
-                new IsDeterminedForApprovedArticleOnly($this->is_approved)
+                new MustBeApproved($this->is_approved)
             ],
             SubmitForm::get()->button_name => [
                 'sometimes', 'required',
