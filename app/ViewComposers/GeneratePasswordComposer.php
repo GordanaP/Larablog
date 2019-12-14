@@ -3,6 +3,7 @@
 namespace App\ViewComposers;
 
 use Illuminate\View\View;
+use App\Facades\SubmitForm;
 use Illuminate\Support\Str;
 use App\Utilities\GeneratePassword;
 

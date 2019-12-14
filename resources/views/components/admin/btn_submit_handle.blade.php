@@ -10,7 +10,7 @@
     @endadmin
 @else
     @submit(['value' => 'do_and_show',
-    'title' => Auth::user()->is_admin ? 'Create & view' : 'Create ' .$model])
+    'title' => Auth::user()->is_admin ? 'Create & view' : 'Create' .$model])
     @endsubmit
 
     @admin

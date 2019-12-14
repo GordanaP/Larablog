@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\HasNoProfile;
+use App\Utilities\SubmitForm;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -34,6 +35,10 @@ class ProfileRequest extends FormRequest
             'last_name' => 'sometimes|required|max:50',
             'biography' => 'nullable|max:500',
             'image' => 'sometimes|image',
+            SubmitForm::get()->button_name => [
+                'sometimes', 'required',
+                Rule::in(SubmitForm::get()->buttons_values())
+            ],
         ];
     }
 }

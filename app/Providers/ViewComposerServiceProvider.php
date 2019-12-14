@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\ViewComposers\AuthorsComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\CategoriesComposer;
+use App\ViewComposers\SubmitFormComposer;
 use App\ViewComposers\GeneratePasswordComposer;
 use App\ViewComposers\Article\IsApprovedComposer;
 use App\ViewComposers\AuthorsWithoutProfileComposer;
@@ -38,5 +39,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('partials.articles._form_save', IsApprovedComposer::class);
         View::composer( 'partials.articles._authors_select_box', AuthorsComposer::class);
         View::composer( 'partials.profiles._authors_select_box', AuthorsWithoutProfileComposer::class);
+        View::composer( 'partials.admin._submit_form', SubmitFormComposer::class);
     }
 }

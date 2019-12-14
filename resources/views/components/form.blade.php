@@ -13,6 +13,5 @@
 
     {{ $slot }}
 
-    @buttonSubmit(['model' => $model]) @endbuttonSubmit
-
+    @include('partials.admin._submit_form')
 </form>

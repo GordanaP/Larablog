@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Utilities\SubmitForm;
 use Illuminate\Validation\Rule;
 use App\Rules\AlphaNumDashSpace;
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,9 +33,9 @@ class RoleRequest extends FormRequest
                 Rule::unique('roles')->ignore($this->role),
                 new AlphaNumDashSpace
             ],
-            'handle_submission' => [
+            SubmitForm::get()->button_name => [
                 'sometimes', 'required',
-                Rule::in(['do_and_show', 'do_and_repeat'])
+                Rule::in(SubmitForm::get()->buttons_values())
             ],
         ];
     }

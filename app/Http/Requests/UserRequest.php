@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Utilities\SubmitForm;
 use Illuminate\Validation\Rule;
 use App\Utilities\GeneratePassword;
 use Illuminate\Support\Facades\Auth;
@@ -33,15 +34,15 @@ class UserRequest extends FormRequest
                 'sometimes','required', 'email', 'max:100',
                 Rule::unique('users')->ignore($this->user)
             ],
-            'handle_submission' => [
+            SubmitForm::get()->button_name => [
                 'sometimes', 'required',
-                Rule::in(['do_and_show', 'do_and_repeat'])
+                Rule::in(SubmitForm::get()->buttons_values())
             ],
         ];
 
         if(Auth::user()->is_admin) {
             $rules['role_id'] = ['sometimes', 'exists:roles,id' ];
-            $rules[GeneratePassword::get()->name] = [
+            $rules[GeneratePassword::get()->button_name] = [
                 'sometimes', 'required',
                 Rule::in(GeneratePassword::get()->values())
             ];
@@ -57,6 +58,11 @@ class UserRequest extends FormRequest
         return $rules;
     }
 
+    /**
+     * The generate pssword value.
+     *
+     * @return [type] [description]
+     */
     private function generatePassword()
     {
         $radioName = GeneratePassword::get()->name;

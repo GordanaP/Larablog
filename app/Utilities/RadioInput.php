@@ -18,7 +18,6 @@ class RadioInput
      */
     public $inputs = [];
 
-
     /**
      * Get all radio inputs.
      *

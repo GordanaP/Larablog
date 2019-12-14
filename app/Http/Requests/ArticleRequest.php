@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use App\Rules\IsAuthor;
+use App\Utilities\SubmitForm;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\IsDeterminedForApprovedArticleOnly;
@@ -41,12 +42,16 @@ class ArticleRequest extends FormRequest
             'body' => 'sometimes|required|min:5',
             'category_id' => 'sometimes|required|exists:categories,id',
             'tag_id' => 'nullable|exists:tags,id',
-            // 'image' => 'sometimes|image',
+            'image' => 'sometimes|image',
             'is_approved' => 'sometimes|required|boolean',
             'publish_at' => [
                 'nullable','required_if:is_approved,1', 'date_format:Y-m-d',
                 'after_or_equal:'.today(),
                 new IsDeterminedForApprovedArticleOnly($this->is_approved)
+            ],
+            SubmitForm::get()->button_name => [
+                'sometimes', 'required',
+                Rule::in(SubmitForm::get()->buttons_values())
             ],
         ];
     }

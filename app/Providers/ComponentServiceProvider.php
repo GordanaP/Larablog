@@ -31,7 +31,7 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('components.admin.btn_edit', 'edit');
         Blade::component('components.admin.btn_view_all', 'viewAll');
         Blade::component('components.admin.btn_submit', 'submit');
-        Blade::component('components.admin.btn_submit_handle', 'buttonSubmit');
+        // Blade::component('components.admin.btn_submit_handle', 'buttonSubmit');
         Blade::component('components.admin.checkbox', 'checkbox');
         Blade::component('components.admin.page_header', 'header');
         Blade::component('components.admin.radio', 'radio');
