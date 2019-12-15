@@ -1,3 +1,5 @@
-@includeWhen(Auth::user()->is_admin, 'partials.profiles._show_admin')
-
-@includeWhen(! Auth::user()->is_admin, 'partials.profiles._show_author')
+@admin
+    @include('partials.profiles._show_admin')
+@else
+    @include('partials.profiles._show_author')
+@endadmin

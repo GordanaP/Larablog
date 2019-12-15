@@ -14,7 +14,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                @can('create', 'App\Article')
+                    <li class="nav-item">
+                        <a class="nav-link text-white uppercase-xs"
+                         href="{{ route('articles.create') }}">
+                            New article
+                        </a>
+                    </li>
+                @endcan
             </ul>
 
             <!-- Right Side Of Navbar -->

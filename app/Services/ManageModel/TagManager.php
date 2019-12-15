@@ -2,15 +2,15 @@
 
 namespace App\Services\ManageModel;
 
-use App\Role;
+use App\Tag;
 use App\Services\ManageModel\Delete;
 
-class RoleManager extends Delete
+class TagManager extends Delete
 {
     public function __construct($data)
     {
         parent::__construct($data);
 
-        $this->model = Role::class;
+        $this->model = Tag::class;
     }
 }

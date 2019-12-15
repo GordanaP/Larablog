@@ -14,15 +14,33 @@ Route::get('/admin', 'Admin\AdminPageController@index')
 /**
  * User
  */
-Route::middleware('account.owner')->resource('users', 'User\UserController')
-    ->only('show','edit', 'update', 'destroy');
+Route::resource('users', 'User\UserController')
+    ->only('show','edit', 'update', 'destroy')
+    ->middleware('can:touch,user');
 
 /**
  * Profile
  */
 Route::resource('profiles', 'Profile\ProfileController')
-    ->only('show','edit', 'update');
+    ->only('show');
+Route::resource('profiles', 'Profile\ProfileController')
+    ->only('edit', 'update')
+    ->middleware('can:touch,profile');
 
+/**
+ * Article
+ */
+Route::resource('articles', 'Article\ArticleController')
+    ->only('index');
+Route::resource('articles', 'Article\ArticleController')
+    ->only('store', 'create')
+    ->middleware('can:create,App\Article');
+Route::resource('articles', 'Article\ArticleController')
+    ->only('show')
+    ->middleware('can:view,article');
+Route::resource('articles', 'Article\ArticleController')
+    ->only('edit', 'update', 'destroy')
+    ->middleware('can:touch,article');
 
 /**
  * Admin Profile

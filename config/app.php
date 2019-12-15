@@ -232,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'RedirectTo' => App\Facades\RedirectTo::class,
         'ArticleImage' => App\Facades\ArticleImage::class,
+        'ArticleStatus' => App\Facades\ArticleStatus::class,
         'ProfileImage' => App\Facades\ProfileImage::class,
     ],
 

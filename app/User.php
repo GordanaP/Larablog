@@ -110,4 +110,9 @@ class User extends Authenticatable
     {
         $this->profile()->save($profile);
     }
+
+    public function owns($model)
+    {
+        return $this->id == $model->user_id;
+    }
 }

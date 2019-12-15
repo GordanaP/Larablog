@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Request;
 class SubmitForm
 {
     /**
-     * { @inheritDocs }
+     * The buttom name.
+     *
+     * @var string
      */
     public $button_name = 'handle_submission';
 
@@ -19,6 +21,9 @@ class SubmitForm
      */
     public $user;
 
+    /**
+     * Create a new class instance.
+     */
     public function __construct()
     {
         $this->user = Auth::user();

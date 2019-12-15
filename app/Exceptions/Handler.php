@@ -50,9 +50,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // if($exception instanceof AuthorizationException) {
-        //     return redirect('/');
-        // }
+        if($exception instanceof AuthorizationException) {
+            return redirect('/');
+        }
 
         if($exception instanceof MethodNotAllowedHttpException && $request->ajax()) {
             return response()->json([

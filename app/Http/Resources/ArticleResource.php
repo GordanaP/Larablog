@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Facades\ArticleStatus;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -19,9 +20,9 @@ class ArticleResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'author' => $this->user->profile->full_name,
-            'status' => $this->getStatus()['name'],
-            'color' => $this->getStatus()['color'],
-            'icon' => $this->getStatus()['icon'],
+            'status' => ArticleStatus::get($this)->name(),
+            'color' => ArticleStatus::get($this)->color(),
+            'icon' => ArticleStatus::get($this)->icon(),
             'publish_at' => $this->is_approved ? $this->publish_at_from_DB : '',
             'link' => [
                 'show' => route('admin.articles.show', $this),

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Utilities\ArticleStatus;
 use App\Services\ManageUrl\RedirectTo;
 use Illuminate\Support\ServiceProvider;
 use App\Services\ManageImage\ArticleImage;
@@ -26,6 +27,10 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind('ArticleStatus', function($app) {
+            return new ArticleStatus;
+        });
+
         $this->app->bind('ProfileImage', function($app){
             return new ProfileImage;
         });

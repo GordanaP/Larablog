@@ -6,6 +6,7 @@ use App\User;
 use App\Article;
 use Illuminate\Support\Str;
 use App\Facades\ArticleImage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use App\Services\ManageModel\Delete;
 
@@ -22,7 +23,7 @@ class ArticleManager extends Delete
 
         $this->model = Article::class;
         $this->article = Request::isMethod('POST') ? new $this->model : Request::route('article') ;
-        $this->author  = Request::route('user') ?? User::find(request('user_id'));
+        $this->author  = Request::route('user') ?? (User::find(request('user_id')) ?? Auth::user());
         $this->tags = request('tag_id');
         $this->image = request('image');
     }

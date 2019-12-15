@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <h3 class="mb-3">My acccount</h3>
+    <h3 class="mb-3">My account</h3>
 
 @endsection

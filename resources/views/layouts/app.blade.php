@@ -12,11 +12,11 @@
 
             @include('partials.app._navbar')
 
-            <div class="container w-4/5">
-                {{-- <header class="blog-header">
-                    <h1 class="blog-title">The Bootstrap Blog</h1>
+            <div class="container w-4/5 mt-4">
+                <header class="blog-header">
+                    <h1 class="blog-title">The LaraBlog</h1>
                     <p class="lead blog-description">An example blog template built with Bootstrap.</p>
-                </header> --}}
+                </header>
 
                 <div class="row py-4" >
                     <main class="col-md-8">

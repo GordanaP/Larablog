@@ -1,5 +1,7 @@
 li.active { color: #ebf8ff !important; }
 a { text-decoration: none !important; }
+a.blue { color: #4299e1 !important; }
+a.blue:hover { color: #3182ce!important; }
 .asterisks { color: #f56565 !important; }
 .show-table {margin-bottom: 40px !important;}
-.show-table tr td {border: none;}
+.show-table tr td {border: none;
