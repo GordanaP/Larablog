@@ -77,7 +77,6 @@ class User extends Authenticatable
      */
     public function addArticle($article)
     {
-        // return $this->articles()->save($article);
         $this->articles()->save($article);
     }
 

@@ -14,10 +14,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white uppercase"
+                     href="{{ route('articles.index') }}">
+                        Articles
+                    </a>
+                </li>
                 @can('create', 'App\Article')
                     <li class="nav-item">
                         <a class="nav-link text-white uppercase-xs"
-                         href="{{ route('articles.create') }}">
+                         href="{{ route('users.articles.create', Auth::user()) }}">
                             New article
                         </a>
                     </li>
@@ -53,15 +59,23 @@
                         <div class="dropdown-menu dropdown-menu-right"
                         aria-labelledby="navbarDropdown">
                             <a class="dropdown-item"
-                                href="{{ route('users.edit', Auth::user() ?? null) }}">
+                                href="{{ route('users.edit', Auth::user()) }}">
                                 Account settings
                             </a>
-                            @author(Auth::user())
+                            @can('viewAny', 'App\Article')
                                 <a class="dropdown-item"
-                                    href="{{ route('profiles.edit', Auth::user()->profile ?? null) }}">
+                                    href="{{ route('users.articles.index', Auth::user()) }}">
+                                    My articles
+                                </a>
+                            @endcan
+
+                            @can('touch', Auth::user()->profile)
+                                <a class="dropdown-item"
+                                    href="{{ route('profiles.edit', Auth::user()->profile) }}">
                                     Edit profile
                                 </a>
-                            @endauthor
+                            @endcan
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

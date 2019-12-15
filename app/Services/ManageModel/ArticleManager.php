@@ -23,7 +23,7 @@ class ArticleManager extends Delete
 
         $this->model = Article::class;
         $this->article = Request::isMethod('POST') ? new $this->model : Request::route('article') ;
-        $this->author  = Request::route('user') ?? (User::find(request('user_id')) ?? Auth::user());
+        $this->author  = Request::route('user') ?? User::find(request('user_id'));
         $this->tags = request('tag_id');
         $this->image = request('image');
     }

@@ -17,9 +17,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles_count = Article::count();
+        $published = Article::with('category', 'user', 'tags', 'image')
+            ->published()
+            ->newest()
+            ->paginate(5);
 
-        return view('articles.index', compact('articles_count'));
+        return view('articles.index')->with([
+            'articles' => $published,
+            'articles_count' => Article::count(),
+        ]);
     }
 
     /**

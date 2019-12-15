@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Traits\DatePresenter;
+use App\Traits\Article\Scopeable;
 use App\Traits\Article\Presentable;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use DatePresenter, Presentable;
+    use DatePresenter, Presentable, Scopeable;
 
     /**
      * The attributes that are mass assignable.

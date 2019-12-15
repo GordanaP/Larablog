@@ -8,7 +8,7 @@
 
     <div class="card card-body">
         @include('partials.articles._form_save', [
-            'route' => route('articles.store'),
+            'route' => route('users.articles.store', $user),
         ])
     </div>
 

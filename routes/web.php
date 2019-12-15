@@ -19,6 +19,16 @@ Route::resource('users', 'User\UserController')
     ->middleware('can:touch,user');
 
 /**
+ * UserArticle
+ */
+Route::resource('users.articles', 'User\UserArticleController')
+    ->only('index')
+    ->middleware('can:viewAny, App\Article', 'can:touch, user');
+Route::resource('users.articles', 'User\UserArticleController')
+    ->only('create', 'store')
+    ->middleware('can:create, App\Article', 'can:create, App\Article');
+
+/**
  * Profile
  */
 Route::resource('profiles', 'Profile\ProfileController')
@@ -32,9 +42,6 @@ Route::resource('profiles', 'Profile\ProfileController')
  */
 Route::resource('articles', 'Article\ArticleController')
     ->only('index');
-Route::resource('articles', 'Article\ArticleController')
-    ->only('store', 'create')
-    ->middleware('can:create,App\Article');
 Route::resource('articles', 'Article\ArticleController')
     ->only('show')
     ->middleware('can:view,article');
