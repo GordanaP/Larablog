@@ -1,4 +1,4 @@
-<div class="sidebar-module">
+<div class="sidebar-module mb-3">
     @filterTitle([
         'filter' => $filter,
     ])

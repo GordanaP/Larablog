@@ -28,9 +28,9 @@ class ArticlePolicy
      * @param  \App\Article  $article
      * @return mixed
      */
-    public function view(User $user, Article $article)
+    public function view(?User $user, Article $article)
     {
-        return $user->owns($article) ? $article : $article->is_published;
+        return optional($user)->owns($article) ? $article : $article->is_published;
     }
 
     /**

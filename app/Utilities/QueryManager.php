@@ -3,6 +3,7 @@
 namespace App\Utilities;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
 
 class QueryManager
 {
@@ -20,7 +21,7 @@ class QueryManager
      */
     public function __construct()
     {
-        $this->query = request()->query();
+        $this->query = Request::query();
     }
 
     /**
@@ -45,7 +46,7 @@ class QueryManager
      */
     public function remove($filter)
     {
-        return request()->except([$filter, 'page']);
+        return Request::except([$filter, 'page']);
     }
 
     /**

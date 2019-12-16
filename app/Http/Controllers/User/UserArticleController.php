@@ -8,6 +8,7 @@ use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use App\Services\Filters\ArticleFilters;
 use App\Services\ManageModel\ArticleManager;
 
 class UserArticleController extends Controller
@@ -17,9 +18,9 @@ class UserArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index(User $user, ArticleFilters $articleFilters)
     {
-        $user_articles = Article::with('category', 'user', 'tags', 'image')
+        $user_articles = Article::filter($articleFilters)
             ->ownedBy($user)
             ->newest()
             ->paginate(5);

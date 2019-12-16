@@ -3,6 +3,7 @@
 namespace App\Services\Filters;
 
 use Closure;
+use Illuminate\Support\Facades\Request;
 
 abstract class Filter
 {
@@ -38,7 +39,7 @@ abstract class Filter
     {
         $this->builder = $next($request);
 
-        if(! request()->has($this->name)) {
+        if(! Request::has($this->name)) {
             return $next($request);
         }
 
