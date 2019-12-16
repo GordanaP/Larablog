@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\CategoriesComposer;
 use App\ViewComposers\SubmitFormComposer;
 use App\ViewComposers\GeneratePasswordComposer;
+use App\ViewComposers\Article\FiltersMapComposer;
 use App\ViewComposers\Article\IsApprovedComposer;
 use App\ViewComposers\AuthorsWithoutProfileComposer;
 
@@ -40,5 +41,6 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer( 'partials.articles._authors_select_box', AuthorsComposer::class);
         View::composer( 'partials.profiles._authors_select_box', AuthorsWithoutProfileComposer::class);
         View::composer( 'partials.admin._submit_form', SubmitFormComposer::class);
+        View::composer( 'partials.app._side', FiltersMapComposer::class);
     }
 }

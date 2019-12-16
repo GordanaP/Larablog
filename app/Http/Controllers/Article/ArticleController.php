@@ -6,6 +6,7 @@ use App\Article;
 use App\Facades\RedirectTo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use App\Services\Filters\ArticleFilters;
 use App\Services\ManageModel\ArticleManager;
 
 class ArticleController extends Controller
@@ -15,9 +16,9 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ArticleFilters $articleFilters)
     {
-        $published = Article::with('category', 'user', 'tags', 'image')
+        $published = Article::filter($articleFilters)
             ->published()
             ->newest()
             ->paginate(5);

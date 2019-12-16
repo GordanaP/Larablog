@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Utilities\UrlManager;
+use App\Utilities\QueryManager;
 use App\Utilities\ArticleStatus;
 use App\Services\ManageUrl\RedirectTo;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +29,14 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind('UrlManager', function($app) {
+            return new UrlManager;
+        });
+
+        $this->app->bind('QueryManager', function($app) {
+            return new QueryManager;
+        });
+
         $this->app->bind('ArticleStatus', function($app) {
             return new ArticleStatus;
         });

@@ -40,4 +40,16 @@ trait Scopeable
     {
         return $query->where('user_id', $user->id);
     }
+
+    /**
+     * Scope a query to only include articles fitered by a query.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \App\Sevices\Filters\ArticleFilters  $articleFilters
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilter($query, $articleFilters)
+    {
+        return $articleFilters->apply($query);
+    }
 }

@@ -3,7 +3,6 @@
 @section('title', 'All article')
 
 @section('content')
-
     @forelse($articles as $article)
         @if (Request::route('user'))
             @can('touch', $article)
@@ -27,5 +26,8 @@
     <div class="mx-auto" href="#pagination">
         {{ $articles->appends(Request::query())->links() }}
     </div>
+@endsection
 
+@section('sidebar')
+    @include('partials.app._side')
 @endsection
