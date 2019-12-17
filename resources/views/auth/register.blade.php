@@ -5,10 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">Register</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
+
                         @csrf
 
                         <div class="form-group row">
@@ -17,7 +18,9 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control "
-                                name="name" value="{{ old('name') }}" autofocus>
+                                name="name" value="{{ old('name') }}">
+
+                                @isInvalid(['field' => 'name']) @endisInvalid
                             </div>
                         </div>
 
@@ -28,6 +31,8 @@
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control"
                                 name="email" value="{{ old('email') }}">
+
+                                @isInvalid(['field' => 'email']) @endisInvalid
                             </div>
                         </div>
 
@@ -36,14 +41,10 @@
                             text-md-right">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password"
+                                <input id="password" name="password" type="password"
                                 class="form-control">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                @isInvalid(['field' => 'password']) @endisInvalid
                             </div>
                         </div>
 

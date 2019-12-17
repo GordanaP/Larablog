@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -53,6 +54,10 @@ class Handler extends ExceptionHandler
         if($exception instanceof AuthorizationException) {
             return redirect('/');
         }
+
+        // if($exception instanceof FatalThrowableError) {
+        //     return redirect('/');
+        // }
 
         if($exception instanceof MethodNotAllowedHttpException && $request->ajax()) {
             return response()->json([

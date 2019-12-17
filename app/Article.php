@@ -4,12 +4,14 @@ namespace App;
 
 use App\Traits\DatePresenter;
 use App\Traits\Article\Scopeable;
+use Laravelista\Comments\Comment;
 use App\Traits\Article\Presentable;
+use Laravelista\Comments\Commentable;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use DatePresenter, Presentable, Scopeable;
+    use Commentable, DatePresenter, Presentable, Scopeable;
 
     /**
      * The attributes that are mass assignable.
@@ -124,4 +126,14 @@ class Article extends Model
     {
         return $this->image;
     }
+
+    /**
+     * The comments that belong to the article.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+        {
+            return $this->morphMany(Comment::class, 'commentable');
+        }
 }

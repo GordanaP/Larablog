@@ -5,13 +5,14 @@ namespace App;
 use App\Traits\DatePresenter;
 use App\Traits\User\HasRoles;
 use App\Traits\User\Presentable;
+use Laravelista\Comments\Commenter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use DatePresenter, HasRoles, Notifiable, Presentable;
+    use Commenter, DatePresenter, HasRoles, Notifiable, Presentable;
 
     /**
      * The attributes that are mass assignable.

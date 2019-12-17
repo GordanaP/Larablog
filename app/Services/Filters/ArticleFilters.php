@@ -22,7 +22,7 @@ class ArticleFilters
     {
         return app(Pipeline::class)
             ->send(Article::query()
-                ->with('category', 'user', 'tags', 'image')
+                ->with('comments', 'category', 'user', 'tags', 'image')
             )
             ->through([
                 // order == order in filter Map ?

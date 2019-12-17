@@ -16,6 +16,13 @@
         <a href="{{ route('profiles.show', $article->user->profile) }}" class="blue">
             {{ $article->user->name }}
         </a>
+
+        @if (! Request::route('article'))
+            <a href="{{ route('articles.show', $article) }}#comments">
+                <i class="fas fa-comments ml-6"></i>
+                {{ $article->comments->count() }}
+            </a>
+        @endif
     </p>
 
     <p class="text-sm italic">{{ $article->excerpt }}</p>

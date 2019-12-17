@@ -17,4 +17,9 @@
     @include('partials.articles._single', [
         'article' => $article
     ])
+
+    <div id="comments">
+        <h4 class="mb-3">Comments ({{ $article->comments->count() }})</h4>
+        @comments(['model' => $article])
+    </div>
 @endsection
