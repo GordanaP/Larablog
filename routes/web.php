@@ -69,6 +69,21 @@ Route::middleware('admin')->prefix('admin')->namespace('Profile')
     });
 
 /**
+ * Admin Comment
+ */
+Route::middleware('admin')->prefix('admin')->namespace('Comment')
+    ->group(function () {
+        Route::get('comments/list', 'CommentAjaxController@index');
+        // Route::delete('comments/{comment?}', 'CommentController@destroy')
+        //     ->name('admin.comments.destroy');
+        Route::resource('comments', 'CommentController', [
+            'parameters' => ['' => 'comment'],
+            'as' => 'admin'
+        ])->except('destroy');
+    });
+
+
+/**
  * Admin Article
  */
 Route::middleware('admin')->prefix('admin')->namespace('Article')
