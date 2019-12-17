@@ -14,6 +14,7 @@
         ])
     @endshow
 
+    <!-- Author articles -->
     <div id="cardArticles">
         @header(['title' => $profile->first_name.' articles',
         'count' => $profile->user->articles->count()])
@@ -27,8 +28,10 @@
         <th width="40%">Title</th>
         <th>Author</th>
         <th>Status</th>
+        <th class="text-center">Comments</th>
         <th class="text-center"><i class="far fa-calendar-alt"></i></th>
     @enddataTable
+
 @endsection
 
 @section('scripts')

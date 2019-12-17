@@ -133,7 +133,7 @@ class Article extends Model
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function comments()
-        {
-            return $this->morphMany(Comment::class, 'commentable');
-        }
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

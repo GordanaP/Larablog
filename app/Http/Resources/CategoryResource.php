@@ -22,6 +22,7 @@ class CategoryResource extends JsonResource
             'link' => [
                 'show' => route('admin.categories.show', $this),
                 'edit' => route('admin.categories.edit', $this),
+                'show_articles' => route('admin.categories.show', $this).'?#cardArticles',
             ]
         ];
     }

@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\DatePresenter;
 use App\Traits\User\HasRoles;
 use App\Traits\User\Presentable;
+use Laravelista\Comments\Comment;
 use Laravelista\Comments\Commenter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -111,6 +112,22 @@ class User extends Authenticatable
         $this->profile()->save($profile);
     }
 
+    /**
+     * The comments that belong to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'commenter_id');
+    }
+
+    /**
+     * Determine if the user owns the model.
+     *
+     * @param  \App\Model $model
+     * @return boolean
+     */
     public function owns($model)
     {
         return $this->id == $model->user_id;

@@ -12,9 +12,10 @@
 
     @dataTable(['records' => 'Articles'])
         <th>Id</th>
-        <th width="40%">Title</th>
+        <th width="30%">Title</th>
         <th>Author</th>
         <th>Status</th>
+        <th class="text-center">Comments</th>
         <th class="text-center"><i class="far fa-calendar-alt"></i></th>
     @enddataTable
 @endsection

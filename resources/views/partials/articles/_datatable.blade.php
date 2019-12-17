@@ -32,13 +32,19 @@ var datatable = table(records).DataTable({
         {
             data: 'author',
             render: function(data, type, row, meta) {
-              return '<a href="' + row.link.show_author + '">'+ row.author +'</a>'
+              return '<a href="' + row.link.show_author + '">'+ data +'</a>'
             }
         },
         {
             data: 'status',
             render: function(data, type, row, meta) {
-              return '<span style="color : '+ row.color +'" class="font-semibold">' + row.status + '</span>'
+              return '<span style="color : '+ row.color +'" class="font-semibold">' + data + '</span>'
+            },
+        },
+        {
+            data: 'comments_count',
+            render: function(data, type, row, meta) {
+              return '<a href="' + row.link.show_comments + '">'+ data +'</a>'
             },
         },
         {
@@ -60,6 +66,10 @@ var datatable = table(records).DataTable({
         {
             targets: table(records).columnIndex(),
             className: 'dt-body-right'
+        },
+        {
+            targets: [5,6],
+            className: 'dt-body-center'
         },
     ],
     "order": [

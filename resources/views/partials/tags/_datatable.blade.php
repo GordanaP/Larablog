@@ -30,8 +30,9 @@ var datatable = table(records).DataTable({
             data: 'name',
         },
         {
+            data: 'articles_count',
             render: function(data, type, row, meta) {
-                return '<a href="' + row.link.show +'">Articles ('+ row.articles_count +')</a>'
+                return '<a href="' + row.link.show_articles +'">'+ data +'</a>'
             },
             searchable: false,
             sortable: false,

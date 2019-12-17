@@ -23,6 +23,7 @@ class ProfileResource extends JsonResource
                 'show' => route('admin.profiles.show', $this),
                 'edit' => route('admin.profiles.edit', $this),
                 'show_account' => route('admin.users.show', $this->user),
+                'show_articles' => route('admin.profiles.show', $this).'?#cardArticles',
             ]
         ];
     }

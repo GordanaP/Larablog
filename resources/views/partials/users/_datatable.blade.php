@@ -33,16 +33,16 @@ var datatable = table(records).DataTable({
             data: 'email',
         },
         {
+            data: 'roles',
             render: function ( data, type, row, meta ) {
 
                 var result = '';
-                var roles = row.roles;
 
-                $.each(roles, function( index, role ) {
+                $.each(data, function( index, role ) {
 
                     result = result + '<a href="/admin/roles/' + role.slug + '">' + role.name + '</a>';
 
-                    if (index < roles.length - 1) {
+                    if (index < data.length - 1) {
                         result = result + ', ';
                     }
                 });

@@ -22,6 +22,7 @@ class RoleResource extends JsonResource
             'link' => [
                 'show' => route('admin.roles.show', $this),
                 'edit' => route('admin.roles.edit', $this),
+                'show_accounts' => route('admin.roles.show', $this).'#cardUsers',
             ]
         ];
     }

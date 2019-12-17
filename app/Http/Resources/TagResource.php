@@ -22,6 +22,7 @@ class TagResource extends JsonResource
             'link' => [
                 'show' => route('admin.tags.show', $this),
                 'edit' => route('admin.tags.edit', $this),
+                'show_articles' => route('admin.tags.show', $this).'?#cardArticles',
             ]
         ];
     }

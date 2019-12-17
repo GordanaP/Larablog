@@ -16,10 +16,14 @@
     @endforelse
 @endrowInfo
 
-@author($user->hasProfile())
+@author($user)
     @rowInfo(['name' => 'Author profile'])
-        <a href="{{ route('admin.profiles.show', $user->profile ?? null) }}">
-            {{ optional($user->profile)->full_name }}
-        </a>
+        @if ($user->hasProfile())
+            <a href="{{ route('admin.profiles.show', $user->profile) }}">
+                {{ optional($user->profile)->full_name }}
+            </a>
+        @else
+            n/a
+        @endif
     @endrowInfo
 @endauthor

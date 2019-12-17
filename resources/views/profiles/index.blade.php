@@ -14,7 +14,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Account</th>
-        <th>Articles</th>
+        <th class="text-center">Articles</th>
     @enddataTable
 @endsection
 

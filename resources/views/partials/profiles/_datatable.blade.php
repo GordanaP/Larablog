@@ -38,7 +38,7 @@ var datatable = table(records).DataTable({
         {
             data: 'articles_count',
             render: function(data, type, row, meta) {
-               return '<a href="' + row.link.show +'">Articles (' + data + ')</a>'
+               return '<a href="' + row.link.show_articles +'">' + data + '</a>'
             }
         },
         {
@@ -57,6 +57,10 @@ var datatable = table(records).DataTable({
         {
             targets: table(records).columnIndex(),
             className: 'dt-body-right'
+        },
+        {
+            targets: 4,
+            className: 'dt-body-center'
         },
     ],
     "order": [

@@ -95,6 +95,11 @@ Route::middleware('admin')->prefix('admin')->namespace('Article')
             'parameters' => ['' => 'article'],
             'as' => 'admin'
         ])->except('destroy');
+        // Route::resource('categories.articles', 'CategoryArticleController', [
+        //     'parameters' => ['' => 'category'],
+        //     'as' => 'admin'
+        // ])->only('create');
+        Route::get('articles/{article}/comments/list', 'ArticleCommentAjaxController@index');
     });
 
 /**
@@ -147,6 +152,7 @@ Route::middleware('admin')->prefix('admin')->namespace('User')
             'parameters' => ['' => 'user'],
             'as' => 'admin'
         ])->except('destroy');
+        Route::get('users/{user}/comments/list', 'UserCommentAjaxController@index');
     });
 
 /**

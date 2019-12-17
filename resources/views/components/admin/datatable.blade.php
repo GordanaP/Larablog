@@ -11,7 +11,7 @@
 
             {{ $slot }}
 
-            <th class="w-1/5"></th>
+            <th width="10%"></th>
         </thead>
 
         <tbody></tbody>
