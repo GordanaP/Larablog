@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Comment;
 
+use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
 use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Services\ManageModel\CommentManager;
 
 class CommentController extends Controller
 {
@@ -27,62 +30,69 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('comments.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = CommentManager::get($request->validated())->save();
+
+        return RedirectTo::route('comments', $comment);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comment $comment)
     {
-        //
+        return view('comments.show', compact('comment'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comment $comment)
     {
-        //
+        return view('comments.edit', compact('comment'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\CommentRequest  $request
+     * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        CommentManager::get($request->validated())->save();
+
+        return RedirectTo::route('comments', $comment);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Http\Requests\CommentRequest  $request
+     * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CommentRequest $request, Comment $comment = null)
     {
-        //
+        CommentManager::get($comment ?? $request->validated()['ids'])->remove();
+
+        return RedirectTo::route('comments', $comment);
     }
 }

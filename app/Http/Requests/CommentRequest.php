@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Utilities\SubmitForm;
+use App\Rules\MustBePublished;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CommentRequest extends FormRequest
@@ -24,7 +27,18 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required'
+            'ids' => 'sometimes|exists:articles,id',
+            'comment' => 'sometimes|required|max:500',
+            'commenter_id' => 'sometimes|required|exists:users,id',
+            'commentable_id' => [
+                'sometimes',
+                'required',
+                new MustBePublished
+            ],
+            SubmitForm::get()->button_name => [
+                'sometimes', 'required',
+                Rule::in(SubmitForm::get()->buttons_values())
+            ],
         ];
     }
 }

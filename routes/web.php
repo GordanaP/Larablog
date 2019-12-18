@@ -74,8 +74,8 @@ Route::middleware('admin')->prefix('admin')->namespace('Profile')
 Route::middleware('admin')->prefix('admin')->namespace('Comment')
     ->group(function () {
         Route::get('comments/list', 'CommentAjaxController@index');
-        // Route::delete('comments/{comment?}', 'CommentController@destroy')
-        //     ->name('admin.comments.destroy');
+        Route::delete('comments/{comment?}', 'CommentController@destroy')
+            ->name('admin.comments.destroy');
         Route::resource('comments', 'CommentController', [
             'parameters' => ['' => 'comment'],
             'as' => 'admin'

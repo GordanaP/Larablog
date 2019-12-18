@@ -21,6 +21,8 @@
 @section('scripts')
     <script>
 
+        clearErrorOnNewInput();
+
         var records = 'Comments';
         var parentId = null;
         var parentRecords = null;

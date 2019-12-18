@@ -24,8 +24,8 @@ class CommentResource extends JsonResource
             'reply' => Comment::find($this->child_id),
             'commenter' => User::find($this->commenter_id)->email ?? $this->guest_email,
             'link' => [
-                'show' => '#',
-                'edit' => '#',
+                'show' => route('admin.comments.show', $this),
+                'edit' => route('admin.comments.edit', $this),
                 'show_article' => route('admin.articles.show', $this->commentable),
                 'show_commenter' => $this->commenter_id ? route('admin.users.show', $this->commenter) : '',
             ]
