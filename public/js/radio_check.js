@@ -51,3 +51,15 @@ function check(el)
 {
     return el.prop("checked", true);
 }
+
+function appendQueryUsingRadio(name, values, url, key = 'user')
+{
+    $('input[name="' + name + '"]').on('change', function() {
+
+        $.each(values, function(index, value) {
+            if(isCheckedRadioValue(name, value)){
+                location.replace(url + '?' + key + '=' + value)
+            }
+        });
+    });
+}

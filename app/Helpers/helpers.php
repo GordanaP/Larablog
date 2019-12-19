@@ -1,6 +1,6 @@
 <?php
 
-function getChecked($value_1, $value_2)
+function checked($value_1, $value_2)
 {
     return $value_1 == $value_2 ? 'checked' : '';
 }

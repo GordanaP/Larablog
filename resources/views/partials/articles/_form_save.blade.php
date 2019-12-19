@@ -63,7 +63,7 @@
                 @checkbox(['name' => 'tag', 'model'=>$tag])
                     @if ($ids = old('tag_id', isset($article) ? $article->tags->pluck('id') : null))
                         @foreach ($ids as $tag_id)
-                            {{ getChecked($tag->id, $tag_id) }}
+                            {{ checked($tag->id, $tag_id) }}
                         @endforeach
                     @endif
                 @endcheckbox
@@ -98,7 +98,7 @@
             @foreach ($approval_radio_inputs as $key => $value)
                 @radio(['name' => $approval_radio_name, 'id' => Str::camel($value), 'value' => $value])
                     @slot('is_checked')
-                        {{ getChecked($value, old('is_approved', $article->is_approved ?? null)) }}
+                        {{ checked($value, old('is_approved', $article->is_approved ?? null)) }}
                     @endslot
                     {{ $key }}
                 @endradio

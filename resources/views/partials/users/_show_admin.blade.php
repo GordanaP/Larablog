@@ -16,7 +16,7 @@
 
     <div id="cardComments">
         @header(['title' => 'Comments', 'count' => $user->comments->count()])
-            @addNew (['route' => '#'])
+            @addNew (['route' => route('admin.users.comments.create', $user)])
             @endaddNew
         @endheader
     </div>

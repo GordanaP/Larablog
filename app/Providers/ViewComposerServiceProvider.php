@@ -9,6 +9,7 @@ use App\ViewComposers\AuthorsComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\CategoriesComposer;
 use App\ViewComposers\SubmitFormComposer;
+use App\ViewComposers\CommenterTypeComposer;
 use App\ViewComposers\GeneratePasswordComposer;
 use App\ViewComposers\Article\FiltersMapComposer;
 use App\ViewComposers\Article\IsApprovedComposer;
@@ -33,6 +34,8 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(['partials.comments._commenter_radio', 'comments.create'],
+            CommenterTypeComposer::class);
         View::composer('partials.users._form_save', GeneratePasswordComposer::class);
         View::composer('partials.users._roles_checkboxes', RolesComposer::class);
         View::composer('partials.articles._form_save', CategoriesComposer::class);
