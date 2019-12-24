@@ -7,9 +7,11 @@
             </option>
         @else
             <option value="">Select the commenter</option>
-            @foreach (\App\User::all() as $user)
+            @foreach ($users as $user)
                 <option value="{{ $user->id }}"
-                    {{ getSelected($user->id, old('commenter_id', $comment->commenter_id ?? null)) }}
+                    {{ getSelected($user->id, old('commenter_id',
+                    Route::currentRouteName() == 'admin.comments.edit'
+                    ? ($comment->commenter_id ?? null) : '')) }}
                 >
                     {{ $user->email }}
                 </option>

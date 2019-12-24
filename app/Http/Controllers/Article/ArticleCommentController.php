@@ -8,8 +8,9 @@ use App\Http\Controllers\Controller;
 class ArticleCommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
+     * @param \App\Article $article
      * @return \Illuminate\Http\Response
      */
     public function create(Article $article)

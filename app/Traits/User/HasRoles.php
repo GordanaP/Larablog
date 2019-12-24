@@ -56,10 +56,20 @@ trait HasRoles
     /**
      * The authors without profiles.
      *
-     * @return Illuminate\Suppot\Colesction
+     * @return Illuminate\Support\Collection
      */
     public function scopeAuthorsWithoutProfile()
     {
         return static::authors()->whereDoesntHave('profile');
+    }
+
+    /**
+     * The repliers to a specific comment.
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public static function repliers($comment)
+    {
+        return static::all()->whereNotIn('id', $comment->commenter_id);
     }
 }

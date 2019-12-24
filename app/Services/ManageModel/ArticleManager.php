@@ -12,9 +12,32 @@ use App\Services\ManageModel\Delete;
 
 class ArticleManager extends Delete
 {
+    /**
+     * The article.
+     *
+     * @var \App\Article
+     */
     private $article;
+
+    /**
+     * The article's author.
+     *
+     * @var \App\User
+     */
     private $author;
+
+    /**
+     * Tags.
+     *
+     * @var array
+     */
     private $tags = [];
+
+    /**
+     * The image.
+     *
+     * @var string
+     */
     private $image;
 
     public function __construct($data)
@@ -28,6 +51,11 @@ class ArticleManager extends Delete
         $this->image = request('image');
     }
 
+    /**
+     * Save the article's relationships.
+     *
+     * @return \App\Article
+     */
     public function save()
     {
         $article = $this->fromForm($this->data);
@@ -39,12 +67,24 @@ class ArticleManager extends Delete
         return $article;
     }
 
+    /**
+     * Save the article.
+     *
+     * @param  array $data
+     * @return \App\Article
+     */
     private function fromForm($data)
     {
         return $this->article->fill($this->filtered($data))
             ->assignAuthor($this->author);
     }
 
+    /**
+     * Filter the empty values.
+     *
+     * @param  array $data
+     * @return array
+     */
     private function filtered($data)
     {
         return collect($data)->reject(function($value){

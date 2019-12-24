@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\User;
 use App\Article;
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Services\Filters\ArticleFilters;

@@ -17,9 +17,9 @@
     <div class="card p-3 w-3/4 mx-auto">
         <div class="card-body">
             @include('partials.comments._form', [
-                'route' => UrlManager::addQueryToRouteWithoutParameter('admin.comments.store', [
-                    'user' => request('user')
-                ]),
+                'route' => UrlManager::addQueryToRouteWithoutParameter(
+                    'admin.comments.store', ['user' => request('user')]
+                ),
             ])
         </div>
     </div>

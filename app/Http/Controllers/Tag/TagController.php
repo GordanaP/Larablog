@@ -92,6 +92,6 @@ class TagController extends Controller
     {
         TagManager::get($tag ?? $request->validated()['ids'])->remove();
 
-        return RedirectTo::route('tags', $tag);
+        return RedirectTo::route('tags');
     }
 }

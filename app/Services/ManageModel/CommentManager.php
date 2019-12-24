@@ -61,10 +61,26 @@ class CommentManager extends Delete
     public function save()
     {
         if ($this->guest) {
-            return $this->fromForm($this->data)->save();
+            $this->comment = $this->fromForm($this->data);
         } else {
-            return $this->registeredComment($this->data)->save();
+            $this->comment = $this->registeredComment($this->data);
         }
+
+        $this->comment->save();
+
+        return $this->comment;
+    }
+
+    /**
+     * The registered user's comment.
+     *
+     * @param  array $data
+     * @return \Laravelista\Comments\Comment
+     */
+    private function registeredComment($data)
+    {
+        return $this->fromForm($data)->commenter()
+            ->associate($this->commenter($data));
     }
 
     /**
@@ -77,21 +93,6 @@ class CommentManager extends Delete
     {
         return $this->comment->fill($data)->commentable()
             ->associate($this->article($data));
-    }
-
-    /**
-     * The registered user's comment.
-     *
-     * @param  array $data
-     * @return \Laravelista\Comments\Comment
-     */
-    private function registeredComment($data)
-    {
-        $this->comment = $this->fromForm($data);
-        $this->comment->commenter()
-            ->associate($this->commenter($data));
-
-        return $this->comment;
     }
 
     /**

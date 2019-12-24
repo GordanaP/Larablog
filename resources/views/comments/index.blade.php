@@ -15,6 +15,7 @@
         <th width="40%">Comment</th>
         <th>Article</th>
         <th>Commenter</th>
+        <th>Replies</th>
     @enddataTable
 @endsection
 

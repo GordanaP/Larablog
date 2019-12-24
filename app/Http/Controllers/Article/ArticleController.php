@@ -99,6 +99,6 @@ class ArticleController extends Controller
     {
         ArticleManager::get($article ?? $request->validated()['ids'])->remove();
 
-        return RedirectTo::route('articles', $article);
+        return RedirectTo::route('articles');
     }
 }

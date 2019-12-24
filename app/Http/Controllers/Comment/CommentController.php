@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Facades\RedirectTo;
-use Illuminate\Http\Request;
 use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
@@ -93,6 +92,6 @@ class CommentController extends Controller
     {
         CommentManager::get($comment ?? $request->validated()['ids'])->remove();
 
-        return RedirectTo::route('comments', $comment);
+        return RedirectTo::route('comments');
     }
 }

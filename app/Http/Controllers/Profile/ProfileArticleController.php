@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Profile;
-use Illuminate\Http\Request;
 
 class ProfileArticleController extends Controller
 {

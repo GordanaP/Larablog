@@ -7,7 +7,8 @@ return [
      * CustomComment model extending the Comment model shipped with the
      * package and change this configuration option to their extended model.
      */
-    'model' => \Laravelista\Comments\Comment::class,
+    // 'model' => \Laravelista\Comments\Comment::class,
+    'model' => \App\CustomComment::class,
 
     /**
      * You can customize the behaviour of these permissions by

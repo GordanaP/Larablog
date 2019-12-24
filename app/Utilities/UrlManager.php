@@ -3,6 +3,7 @@
 namespace App\Utilities;
 
 use App\Facades\QueryManager;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 
 class UrlManager
@@ -36,5 +37,10 @@ class UrlManager
     public function addQueryToRouteWithoutParameter($route, $query)
     {
         return route($route, QueryManager::build($query));
+    }
+
+    public function detectsRoute($name)
+    {
+        return Route::currentRouteName() == $name;
     }
 }

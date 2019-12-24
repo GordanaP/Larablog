@@ -10,7 +10,7 @@
     <!-- Article -->
     @include('partials.comments._articles_select_box')
 
-    <!-- Body -->
+    <!-- Comment -->
     <div class="form-group">
         <label for="comment">Comment: @asterisks @endasterisks</label>
         <textarea name="comment" id="comment" class="form-control" rows="5"

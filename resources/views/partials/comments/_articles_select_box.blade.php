@@ -7,7 +7,7 @@
             </option>
         @else
             <option value="">Select the article</option>
-            @foreach (\App\Article::published()->get() as $article)
+            @foreach ($published_articles as $article)
                 <option value="{{ $article->id }}"
                     {{ getSelected($article->id, old('commentable_id', $comment->commentable_id ?? null)) }}
                 >
