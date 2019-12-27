@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
-use App\Services\ManageModel\CommentManager;
+// use App\Services\ManageModel\CommentManager;
 
 class CommentController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,9 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        $comment = CommentManager::get($request->validated())->save();
+        // $comment = CommentManager::get($request->validated())->save();
+
+        $comment = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('comments', $comment);
     }
@@ -76,7 +86,9 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
-        CommentManager::get($request->validated())->save();
+        // CommentManager::get($request->validated())->save();
+
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('comments', $comment);
     }
@@ -90,7 +102,9 @@ class CommentController extends Controller
      */
     public function destroy(CommentRequest $request, Comment $comment = null)
     {
-        CommentManager::get($comment ?? $request->validated()['ids'])->remove();
+        // CommentManager::get($comment ?? $request->validated()['ids'])->remove();
+        //
+        $this->modelManager->remove($comment ?? $request->validated()['ids']);
 
         return RedirectTo::route('comments');
     }

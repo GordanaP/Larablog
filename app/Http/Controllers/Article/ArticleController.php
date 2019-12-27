@@ -4,13 +4,21 @@ namespace App\Http\Controllers\Article;
 
 use App\Article;
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Services\Filters\ArticleFilters;
-use App\Services\ManageModel\ArticleManager;
+// use App\Services\ManageModel\ArticleManager;
 
 class ArticleController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +55,8 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $article = ArticleManager::get($request->validated())->save();
+        // $article = ArticleManager::get($request->validated())->save();
+        $article = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('articles', $article);
     }
@@ -83,7 +92,9 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-        ArticleManager::get($request->validated())->save();
+        // ArticleManager::get($request->validated())->save();
+
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('articles', $article);
     }
@@ -97,7 +108,8 @@ class ArticleController extends Controller
      */
     public function destroy(ArticleRequest $request, Article $article = null)
     {
-        ArticleManager::get($article ?? $request->validated()['ids'])->remove();
+        // ArticleManager::get($article ?? $request->validated()['ids'])->remove();
+        $this->modelManager->remove($article ?? $request->validated()['ids']);
 
         return RedirectTo::route('articles');
     }

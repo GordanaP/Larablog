@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Tag;
 
 use App\Tag;
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use App\Http\Requests\TagRequest;
 use App\Http\Controllers\Controller;
-use App\Services\ManageModel\TagManager;
+// use App\Services\ManageModel\TagManager;
 
 class TagController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,8 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $tag = Tag::create($request->validated());
+        // $tag = Tag::create($request->validated());
+        $tag = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('tags', $tag);
     }
@@ -76,7 +85,9 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $tag->update($request->validated());
+        // $tag->update($request->validated());
+        //
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('tags', $tag);
     }
@@ -90,7 +101,9 @@ class TagController extends Controller
      */
     public function destroy(TagRequest $request, Tag $tag = null)
     {
-        TagManager::get($tag ?? $request->validated()['ids'])->remove();
+        // TagManager::get($tag ?? $request->validated()['ids'])->remove();
+
+        $this->modelManager->remove($tag ?? $request->validated()['ids']);
 
         return RedirectTo::route('tags');
     }

@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Profile;
 
 use App\Profile;
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Services\ManageModel\ProfileManager;
 
 class ProfileController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,9 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $profile = ProfileManager::get($request->validated())->save();
+        // $profile = ProfileManager::get($request->validated())->save();
+        //
+        $profile = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -76,7 +86,9 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        ProfileManager::get($request->validated())->save();
+        // ProfileManager::get($request->validated())->save();
+        //
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -90,7 +102,9 @@ class ProfileController extends Controller
      */
     public function destroy(ProfileRequest $request, Profile $profile = null)
     {
-        ProfileManager::get($request->validated()['ids'])->remove();
+        // ProfileManager::get($request->validated()['ids'])->remove();
+        //
+        $this->modelManager->remove($profile ?? $request->validated()['ids']);
 
         return RedirectTo::route('profiles');
     }

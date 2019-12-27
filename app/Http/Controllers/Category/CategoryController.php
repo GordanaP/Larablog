@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Services\ManageModel\CategoryManager;
 
 class CategoryController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->validated());
+        // $category = Category::create($request->validated());
+        //
+        $category = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('categories', $category);
     }
@@ -76,7 +86,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        // $category->update($request->validated());
+        //
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('categories', $category);
     }
@@ -90,7 +102,9 @@ class CategoryController extends Controller
      */
     public function destroy(CategoryRequest $request, Category $category = null)
     {
-        CategoryManager::get($category ?? $request->validated()['ids'])->remove();
+        // CategoryManager::get($category ?? $request->validated()['ids'])->remove();
+
+        $this->modelManager->remove($category ?? $request->validated()['ids']);
 
         return RedirectTo::route('categories');
     }

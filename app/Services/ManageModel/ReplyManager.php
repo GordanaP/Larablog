@@ -2,11 +2,12 @@
 
 namespace App\Services\ManageModel;
 
+use App\Contracts\ModelManager;
 use Laravelista\Comments\Comment;
-use App\Services\ManageModel\Delete;
 use Illuminate\Support\Facades\Request;
+use App\Services\ManageModel\DeleteModel;
 
-class ReplyManager extends Delete
+class ReplyManager extends DeleteModel implements ModelManager
 {
     /**
      * The reply.
@@ -30,26 +31,12 @@ class ReplyManager extends Delete
     private $commenter_type;
 
     /**
-     * The commentable type.
-     *
-     * @var string
-     */
-    private $commentable_type;
-
-    /**
      * Create a new class instance.
-     *
-     * @param array $data
      */
-    public function __construct($data)
+    public function __construct()
     {
-        parent::__construct($data);
-
         $this->model = Comment::class;
-        $this->reply = Request::isMethod('POST') ? new $this->model : Request::route('comment') ;
-        $this->comment = Request::route('comment') ;
         $this->commenter_type  = 'App\User';
-        $this->commentable_type  = 'App\Article';
     }
 
     /**
@@ -57,25 +44,36 @@ class ReplyManager extends Delete
      *
      * @return \Laravelista\Comments\Comment
      */
-    public function save()
+    public function save($data)
     {
-        $this->reply->fill($this->data)
-            ->commenter()->associate($this->replier($this->data))
-            ->commentable()->associate($this->comment->commentable)
-            ->parent()->associate($this->comment)
-            ->save();
+        $reply = $this->reply()->fill($data)
+            ->commenter()->associate($this->replier($data))
+            ->commentable()->associate($this->comment()->commentable)
+            ->parent()->associate($this->comment());
 
-        return $this->reply;
+        $reply->save();
+
+        return $reply;
     }
 
     /**
      * The replier.
      *
      * @param  array $data
-     * @return array
+     * @return \App\User
      */
     private function replier($data)
     {
         return $this->commenter_type::findOrFail($data['commenter_id']);
+    }
+
+    private function reply()
+    {
+        return new $this->model;
+    }
+
+    private function comment()
+    {
+        return Request::route('comment');
     }
 }

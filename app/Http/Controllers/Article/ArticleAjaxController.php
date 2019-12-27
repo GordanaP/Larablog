@@ -15,6 +15,8 @@ class ArticleAjaxController extends Controller
      */
     public function index(Article $article)
     {
-        return ArticleResource::collection(Article::all());
+        return ArticleResource::collection(
+            Article::with('comments', 'category', 'user', 'tags', 'image')->get()
+        );
     }
 }

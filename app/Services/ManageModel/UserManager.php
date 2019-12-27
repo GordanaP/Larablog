@@ -4,29 +4,28 @@ namespace App\Services\ManageModel;
 
 use App\User;
 use Illuminate\Support\Str;
+use App\Contracts\ModelManager;
 use App\Utilities\GeneratePassword;
-use App\Services\ManageModel\Delete;
 use Illuminate\Support\Facades\Request;
+use App\Services\ManageModel\DeleteModel;
 
-class UserManager extends Delete
+class UserManager extends DeleteModel implements ModelManager
 {
     private $user;
     private $roles;
     private $generate_password;
 
-    public function __construct($data)
+    public function __construct()
     {
-        parent::__construct($data);
-
         $this->model = User::class;
-        $this->user = Request::isMethod('POST') ? new $this->model : Request::route('user') ;
+        // $this->user = Request::isMethod('POST') ? new $this->model : Request::route('user') ;
         $this->roles = request('role_id');
         $this->generate_password = request(GeneratePassword::get()->name);
     }
 
-    public function save()
+    public function save($data)
     {
-        $user = $this->fromForm($this->data);
+        $user = $this->fromForm($data);
 
         $user->assignRoles($this->roles);
 
@@ -35,9 +34,11 @@ class UserManager extends Delete
 
     private function fromForm($data)
     {
-        $this->user->fill($this->credentials($data))->save();
+        $user = $this->user()->fill($this->credentials($data));
 
-        return $this->user;
+        $user->save();
+
+        return $user;
     }
 
     private function credentials(array $data)
@@ -48,5 +49,10 @@ class UserManager extends Delete
         }
 
         return collect($data)->filter()->toArray();
+    }
+
+    private function user()
+    {
+        return Request::route('user') ?? new $this->model;
     }
 }

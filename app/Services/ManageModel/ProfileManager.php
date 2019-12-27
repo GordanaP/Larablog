@@ -5,28 +5,26 @@ namespace App\Services\ManageModel;
 use App\User;
 use App\Profile;
 use App\Facades\ProfileImage;
-use App\Services\ManageModel\Delete;
+use App\Contracts\ModelManager;
 use Illuminate\Support\Facades\Request;
+use App\Services\ManageModel\DeleteModel;
 
-class ProfileManager extends Delete
+class ProfileManager extends DeleteModel implements ModelManager
 {
     private $profile;
     private $author;
     private $image;
 
-    public function __construct($data)
+    public function __construct()
     {
-        parent::__construct($data);
-
         $this->model = Profile::class;
-        $this->profile = Request::isMethod('POST') ? new $this->model : Request::route('profile') ;
         $this->author  = Request::route('user') ?? User::find(request('user_id'));
         $this->image = request('avatar');
     }
 
-    public function save()
+    public function save($data)
     {
-        $profile = $this->fromForm($this->data);
+        $profile = $this->fromForm($data);
 
         ProfileImage::manage($profile, $this->image);
 
@@ -35,7 +33,9 @@ class ProfileManager extends Delete
 
     private function fromForm($data)
     {
-       return $this->author ? $this->profile->fill($data)->assignAuthor($this->author)
+       return $this->author ? (Request::route('profile') ?? new $this->model)
+            ->fill($data)
+            ->assignAuthor($this->author)
         : tap($this->profile)->update($data);
     }
 }

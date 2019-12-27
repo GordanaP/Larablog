@@ -4,13 +4,21 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Facades\RedirectTo;
+use App\Contracts\ModelManager;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Services\ManageUrl\Redirect;
-use App\Services\ManageModel\UserManager;
+// use App\Services\ManageModel\UserManager;
 
 class UserController extends Controller
 {
+    private $modelManager;
+
+    public function __construct(ModelManager $modelManager)
+    {
+        $this->modelManager = $modelManager;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +49,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = UserManager::get($request->validated())->save();
+        // $user = UserManager::get($request->validated())->save();
+        $user = $this->modelManager->save($request->validated());
 
         return RedirectTo::route('users', $user);
     }
@@ -77,7 +86,8 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        UserManager::get($request->validated())->save();
+        // UserManager::get($request->validated())->save();
+        $this->modelManager->save($request->validated());
 
         return RedirectTo::route('users', $user);
     }
@@ -91,7 +101,9 @@ class UserController extends Controller
      */
     public function destroy(UserRequest $request, User $user = null)
     {
-        UserManager::get($user ?? $request->validated()['ids'])->remove();
+        // UserManager::get($user ?? $request->validated()['ids'])->remove();
+
+        $user = $this->modelManager->remove($user ?? $request->validated()['ids']);
 
         return RedirectTo::route('users');
     }

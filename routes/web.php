@@ -1,8 +1,13 @@
 <?php
 
+use App\Utilities\Worker;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/test', 'TestController@index');
+Route::get('/error', 'ErrorController@index');
 
 Auth::routes();
 

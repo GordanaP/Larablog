@@ -2,19 +2,13 @@
 
 namespace App\Services\ManageModel;
 
+use App\Contracts\ModelManager;
 use Laravelista\Comments\Comment;
-use App\Services\ManageModel\Delete;
 use Illuminate\Support\Facades\Request;
+use App\Services\ManageModel\DeleteModel;
 
-class CommentManager extends Delete
+class CommentManager extends DeleteModel implements ModelManager
 {
-    /**
-     * The comment.
-     *
-     * @var \Laravelista\Comments\Comment
-     */
-    private $comment;
-
     /**
      * The commenter type.
      *
@@ -30,27 +24,15 @@ class CommentManager extends Delete
     private $commentable_type;
 
     /**
-     * The guest.
-     *
-     * @var boolean
-     */
-    private $guest;
-
-    /**
      * Create a new class instance.
      *
      * @param array $data
      */
-    public function __construct($data)
+    public function __construct()
     {
-        parent::__construct($data);
-
         $this->model = Comment::class;
-        $this->comment = Request::isMethod('POST') ? new $this->model : Request::route('comment') ;
         $this->commenter_type  = 'App\User';
         $this->commentable_type  = 'App\Article';
-        $this->guest = ! Request::route('comment') ? request('user') == 'guest'
-            : ! Request::route('comment')->commenter;
     }
 
     /**
@@ -58,17 +40,17 @@ class CommentManager extends Delete
      *
      * @return \Laravelista\Comments\Comment
      */
-    public function save()
+    public function save($data)
     {
-        if ($this->guest) {
-            $this->comment = $this->fromForm($this->data);
+        if ($this->guest()) {
+            $comment = $this->fromForm($data);
         } else {
-            $this->comment = $this->registeredComment($this->data);
+            $comment = $this->registeredComment($data);
         }
 
-        $this->comment->save();
+        $comment->save();
 
-        return $this->comment;
+        return $comment;
     }
 
     /**
@@ -91,7 +73,7 @@ class CommentManager extends Delete
      */
     private function fromForm($data)
     {
-        return $this->comment->fill($data)->commentable()
+        return $this->comment()->fill($data)->commentable()
             ->associate($this->article($data));
     }
 
@@ -115,5 +97,16 @@ class CommentManager extends Delete
     private function commenter($data)
     {
         return $this->commenter_type::findOrFail($data['commenter_id']);
+    }
+
+    private function comment()
+    {
+        return Request::route('comment') ?? new $this->model;
+    }
+
+    private function guest()
+    {
+        return  ! Request::route('comment') ? request('user') == 'guest'
+            : ! Request::route('comment')->commenter;
     }
 }
