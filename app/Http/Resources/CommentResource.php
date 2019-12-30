@@ -27,7 +27,7 @@ class CommentResource extends JsonResource
                 'show' => route('admin.comments.show', $this),
                 'edit' => route('admin.comments.edit', $this),
                 'show_article' => route('admin.articles.show', $this->commentable),
-                'show_commenter' => $this->commenter_id
+                'show_commenter' => $this->commenter
                     ? route('admin.users.show', $this->commenter) : '',
                 'show_replies' => route('admin.comments.show', $this).'?#cardComments',
             ]

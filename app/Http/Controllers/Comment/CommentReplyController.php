@@ -3,19 +3,28 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use Laravelista\Comments\Comment;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Controllers\Controller;
-// use App\Services\ManageModel\ReplyManager;
+use App\Repositories\ReplyRepository;
 
 class CommentReplyController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation
+     *
+     * @var \App\Repositories\ReplyRepository
+     */
+    private $replies;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Repositories\ReplyRepository $replies
+     */
+    public function __construct(ReplyRepository $replies)
     {
-        $this->modelManager = $modelManager;
+        $this->replies = $replies;
     }
 
     /**
@@ -32,14 +41,13 @@ class CommentReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CommentRequest  $request
+     * @param  \App\Http\Requests\ReplyRequest  $request
+     * @param \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function store(ReplyRequest $request, Comment $comment)
     {
-        // $comment = ReplyManager::get($request->validated())->save();
-
-        $comment = $this->modelManager->save($request->validated());
+        $comment = $this->replies->create($request->validated());
 
         return RedirectTo::route('comments', $comment);
     }

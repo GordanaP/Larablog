@@ -4,35 +4,40 @@ namespace App\Http\Controllers\Article;
 
 use App\Article;
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Services\Filters\ArticleFilters;
-// use App\Services\ManageModel\ArticleManager;
+use App\Contracts\EloquentModelRepository;
 
 class ArticleController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var \App\Contracts\EloquentModelRepository
+     */
+    private $articles;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\EloquentModelRepository $articles
+     */
+    public function __construct(EloquentModelRepository $articles)
     {
-        $this->modelManager = $modelManager;
+        $this->articles = $articles;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param \App\Services\Filters\ArticleFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(ArticleFilters $articleFilters)
+    public function index(ArticleFilters $filters)
     {
-        $published = Article::filter($articleFilters)
-            ->published()
-            ->newest()
-            ->paginate(5);
-
         return view('articles.index')->with([
-            'articles' => $published,
+            'articles' => $this->articles->published($filters),
             'articles_count' => Article::count(),
         ]);
     }
@@ -55,8 +60,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        // $article = ArticleManager::get($request->validated())->save();
-        $article = $this->modelManager->save($request->validated());
+        $article = $this->articles->create($request->validated());
 
         return RedirectTo::route('articles', $article);
     }
@@ -92,9 +96,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-        // ArticleManager::get($request->validated())->save();
-
-        $this->modelManager->save($request->validated());
+        $this->articles->update($article, $request->validated());
 
         return RedirectTo::route('articles', $article);
     }
@@ -108,8 +110,7 @@ class ArticleController extends Controller
      */
     public function destroy(ArticleRequest $request, Article $article = null)
     {
-        // ArticleManager::get($article ?? $request->validated()['ids'])->remove();
-        $this->modelManager->remove($article ?? $request->validated()['ids']);
+        $this->articles->remove($article ?? $request->validated()['ids']);
 
         return RedirectTo::route('articles');
     }

@@ -19,7 +19,8 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->instance('article_image', new ArticleImage);
+        $this->app->instance('profile_image', new ProfileImage);
     }
 
     /**
@@ -39,14 +40,6 @@ class UtilityServiceProvider extends ServiceProvider
 
         $this->app->bind('ArticleStatus', function($app) {
             return new ArticleStatus;
-        });
-
-        $this->app->bind('ProfileImage', function($app){
-            return new ProfileImage;
-        });
-
-        $this->app->bind('ArticleImage', function($app){
-            return new ArticleImage;
         });
 
         $this->app->bind('RedirectTo', function($app) {

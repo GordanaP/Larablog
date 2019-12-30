@@ -1,9 +1,15 @@
 <div class="form-group">
     <label for="commentable_id">Article: @asterisks @endasterisks</label>
-    <select name="commentable_id" id="commentable_id" class="form-control">
+    <select name="commentable_id" id="commentable_id" class="form-control"
+        {{ Request::route('comment') || Request::route('article') ? 'disabled' : '' }}
+    >
         @if (Request::route('article'))
-            <option value="{{ $article->id }}" selected>
+            <option value="{{ $article->id }}">
                 {{ $article->title }}
+            </option>
+        @elseif(Request::route('comment'))
+            <option value="{{ $comment->commentable_id }}" selected>
+                {{ $comment->commentable->title }}
             </option>
         @else
             <option value="">Select the article</option>

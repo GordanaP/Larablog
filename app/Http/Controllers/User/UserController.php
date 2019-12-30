@@ -4,19 +4,27 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Services\ManageUrl\Redirect;
-// use App\Services\ManageModel\UserManager;
+use App\Contracts\EloquentModelRepository;
 
 class UserController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var App\Contracts\EloquentModelRepository $users
+     */
+    private $users;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\EloquentModelRepository
+     */
+    public function __construct(EloquentModelRepository $users)
     {
-        $this->modelManager = $modelManager;
+        $this->users = $users;
     }
 
     /**
@@ -26,9 +34,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users_count = User::count();
-
-        return view('users.index', compact('users_count'));
+        return view('users.index')->with([
+            'users_count' => $this->users->count()
+        ]);
     }
 
     /**
@@ -44,13 +52,12 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserReque  $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
     {
-        // $user = UserManager::get($request->validated())->save();
-        $user = $this->modelManager->save($request->validated());
+        $user = $this->users->create($request->validated());
 
         return RedirectTo::route('users', $user);
     }
@@ -86,8 +93,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        // UserManager::get($request->validated())->save();
-        $this->modelManager->save($request->validated());
+        $this->users->update($user, $request->validated());
 
         return RedirectTo::route('users', $user);
     }
@@ -101,9 +107,7 @@ class UserController extends Controller
      */
     public function destroy(UserRequest $request, User $user = null)
     {
-        // UserManager::get($user ?? $request->validated()['ids'])->remove();
-
-        $user = $this->modelManager->remove($user ?? $request->validated()['ids']);
+        $this->users->remove($user ?? $request->validated()['ids']);
 
         return RedirectTo::route('users');
     }

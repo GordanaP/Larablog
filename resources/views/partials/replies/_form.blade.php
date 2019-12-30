@@ -3,7 +3,9 @@
     <!-- Comment -->
     <div class="form-group">
         <label for="comment">Comment:</label>
-        <input type="text" class="form-control" value="{{ $comment->comment }}">
+        <input type="text" class="form-control" value="{{ $comment->comment }}"
+            {{ Request::route('comment') ? 'disabled' : '' }}
+        >
     </div>
 
     <!-- Reply -->

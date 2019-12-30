@@ -3,19 +3,29 @@
 namespace App\Http\Controllers\Comment;
 
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
+use Illuminate\Http\Request;
 use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
-// use App\Services\ManageModel\CommentManager;
+use App\Contracts\EloquentModelRepository;
 
 class CommentController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var App\Contracts\EloquentModelRepository
+     */
+    private $comments;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\EloquentModelRepository $comments
+     */
+    public function __construct(EloquentModelRepository $comments)
     {
-        $this->modelManager = $modelManager;
+        $this->comments = $comments;
     }
 
     /**
@@ -48,9 +58,7 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        // $comment = CommentManager::get($request->validated())->save();
-
-        $comment = $this->modelManager->save($request->validated());
+        $comment = $this->comments->create($request->all());
 
         return RedirectTo::route('comments', $comment);
     }
@@ -86,9 +94,7 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
-        // CommentManager::get($request->validated())->save();
-
-        $this->modelManager->save($request->validated());
+        $this->comments->update($comment, $request->validated());
 
         return RedirectTo::route('comments', $comment);
     }
@@ -102,9 +108,7 @@ class CommentController extends Controller
      */
     public function destroy(CommentRequest $request, Comment $comment = null)
     {
-        // CommentManager::get($comment ?? $request->validated()['ids'])->remove();
-        //
-        $this->modelManager->remove($comment ?? $request->validated()['ids']);
+        $this->comments->remove($comment ?? $request->validated()['ids']);
 
         return RedirectTo::route('comments');
     }

@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface ModelImage
+interface ImageManager
 {
     public function manage($model, $data);
 }

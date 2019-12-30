@@ -12,7 +12,7 @@
 
     <div class="card p-3 w-3/4 mx-auto">
         <div class="card-body">
-            @include('partials.articles._form_save', [
+            @include('partials.articles._form', [
                 'route' => route('admin.articles.store'),
             ])
         </div>

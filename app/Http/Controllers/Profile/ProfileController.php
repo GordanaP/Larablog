@@ -4,18 +4,27 @@ namespace App\Http\Controllers\Profile;
 
 use App\Profile;
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
-use App\Services\ManageModel\ProfileManager;
+use App\Contracts\EloquentModelRepository;
 
 class ProfileController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var App\Contracts\EloquentModelRepository
+     */
+    private $profiles;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\EloquentModelRepository $profiles
+     */
+    public function __construct(EloquentModelRepository $profiles)
     {
-        $this->modelManager = $modelManager;
+        $this->profiles = $profiles;
     }
 
     /**
@@ -25,9 +34,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles_count = Profile::count();
-
-        return view('profiles.index', compact('profiles_count'));
+        return view('profiles.index')->with([
+            'profiles_count' => Profile::count()
+        ]);
     }
 
     /**
@@ -48,9 +57,7 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        // $profile = ProfileManager::get($request->validated())->save();
-        //
-        $profile = $this->modelManager->save($request->validated());
+        $profile = $this->profiles->create($request->validated());
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -86,9 +93,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        // ProfileManager::get($request->validated())->save();
-        //
-        $this->modelManager->save($request->validated());
+        $this->profiles->update($profile, $request->validated());
 
         return RedirectTo::route('profiles', $profile);
     }
@@ -102,9 +107,7 @@ class ProfileController extends Controller
      */
     public function destroy(ProfileRequest $request, Profile $profile = null)
     {
-        // ProfileManager::get($request->validated()['ids'])->remove();
-        //
-        $this->modelManager->remove($profile ?? $request->validated()['ids']);
+        $this->profiles->remove($profile ?? $request->validated()['ids']);
 
         return RedirectTo::route('profiles');
     }

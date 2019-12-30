@@ -8,24 +8,38 @@ use App\Facades\RedirectTo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Services\Filters\ArticleFilters;
-use App\Services\ManageModel\ArticleManager;
+use App\Contracts\EloquentModelRepository;
 
 class UserArticleController extends Controller
 {
     /**
+     * The repository implementation.
+     *
+     * @var \App\Contracts\EloquentModelRepository
+     */
+    private $articles;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\EloquentModelRepository $articles
+     */
+    public function __construct(EloquentModelRepository $articles)
+    {
+        $this->articles = $articles;
+    }
+
+    /**
      * Display a listing of the resource.
      *
+     * @param \App\User $user
+     * @param \App\Services\Filters\ArticleFilters $filters
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user, ArticleFilters $articleFilters)
+    public function index(User $user, ArticleFilters $filters)
     {
-        $user_articles = Article::filter($articleFilters)
-            ->ownedBy($user)
-            ->newest()
-            ->paginate(5);
-
         return view('articles.index')->with([
-            'articles' => $user_articles,
+            'articles' => $this->articles->ownedBy($user, $filters),
             'user' => $user
         ]);
     }
@@ -33,6 +47,7 @@ class UserArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function create(User $user)
@@ -43,12 +58,13 @@ class UserArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ArticleRequest  $request
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request, User $user)
     {
-        $article = ArticleManager::get($request->validated())->save();
+        $article = $this->articles->create($request->validated());
 
         return RedirectTo::route('articles', $article);
     }

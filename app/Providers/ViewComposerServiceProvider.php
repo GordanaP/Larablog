@@ -42,9 +42,9 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('partials.users._form_save', GeneratePasswordComposer::class);
         View::composer('partials.users._roles_checkboxes', RolesComposer::class);
         View::composer('partials.comments._articles_select_box', PublishedComposer::class);
-        View::composer('partials.articles._form_save', CategoriesComposer::class);
-        View::composer('partials.articles._form_save', TagsComposer::class);
-        View::composer('partials.articles._form_save', IsApprovedComposer::class);
+        View::composer('partials.articles._form', CategoriesComposer::class);
+        View::composer('partials.articles._form', TagsComposer::class);
+        View::composer('partials.articles._form', IsApprovedComposer::class);
         View::composer( 'partials.articles._authors_select_box', AuthorsComposer::class);
         View::composer( 'partials.profiles._authors_select_box', AuthorsWithoutProfileComposer::class);
         View::composer( 'partials.admin._submit_form', SubmitFormComposer::class);

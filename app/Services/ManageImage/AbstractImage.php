@@ -4,7 +4,7 @@ namespace App\Services\ManageImage;
 
 use Illuminate\Support\Facades\Storage;
 
-abstract class Image
+abstract class AbstractImage
 {
     private $disk;
     private $relationship;

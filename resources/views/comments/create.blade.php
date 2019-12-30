@@ -11,7 +11,9 @@
             @endviewAll
         @endheader
 
-        @include('partials.comments._commenter_radio')
+        @if (! Request::route('user'))
+            @include('partials.comments._commenter_radio')
+        @endif
     </div>
 
     <div class="card p-3 w-3/4 mx-auto">
@@ -20,6 +22,7 @@
                 'route' => UrlManager::addQueryToRouteWithoutParameter(
                     'admin.comments.store', ['user' => request('user')]
                 ),
+
             ])
         </div>
     </div>

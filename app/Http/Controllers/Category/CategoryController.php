@@ -4,18 +4,27 @@ namespace App\Http\Controllers\Category;
 
 use App\Category;
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Services\ManageModel\CategoryManager;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var \App\Contracts\CategoryRepository
+     */
+    private $categories;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\CategoryRepository $categories
+     */
+    public function __construct(CategoryRepository $categories)
     {
-        $this->modelManager = $modelManager;
+        $this->categories = $categories;
     }
 
     /**
@@ -25,9 +34,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories_count = Category::count();
-
-        return view('categories.index', compact('categories_count'));
+        return view('categories.index')->with([
+            'categories_count' => Category::count()
+        ]);
     }
 
     /**
@@ -48,9 +57,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        // $category = Category::create($request->validated());
-        //
-        $category = $this->modelManager->save($request->validated());
+        $category = Category::create($request->validated());
 
         return RedirectTo::route('categories', $category);
     }
@@ -86,9 +93,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        // $category->update($request->validated());
-        //
-        $this->modelManager->save($request->validated());
+        $category->update($request->validated());
 
         return RedirectTo::route('categories', $category);
     }
@@ -97,14 +102,12 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Http\Requests\CategoryRequest  $request
-     * @param  \App\Category  $category
+     * @param  \App\Category|null  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(CategoryRequest $request, Category $category = null)
     {
-        // CategoryManager::get($category ?? $request->validated()['ids'])->remove();
-
-        $this->modelManager->remove($category ?? $request->validated()['ids']);
+        $this->categories->remove($category ?? $request->validated()['ids']);
 
         return RedirectTo::route('categories');
     }

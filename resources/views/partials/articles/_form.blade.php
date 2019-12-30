@@ -85,7 +85,7 @@
 
         @if (isset($article) && $article->hasImage())
             <div class="w-1/4">
-                <img src="{{ ArticleImage::getUrl($article->image) }}"
+                <img src="{{ App::make('article_image')->getUrl($article->image) }}"
                 alt="Article Image">
             </div>
         @endif

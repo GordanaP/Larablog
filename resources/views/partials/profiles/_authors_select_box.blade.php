@@ -1,9 +1,15 @@
 <div class="form-group">
     <label for="user_id">User: @asterisks @endasterisks</label>
-    <select name="user_id" id="user_id" class="form-control">
+    <select name="user_id" id="user_id" class="form-control"
+        {{ Request::route('profile') ? 'disabled' : '' }}
+    >
         @if (Request::route('user'))
             <option value="{{ $user->id }}" selected>
                 {{ $user->email }}
+            </option>
+        @elseif(Request::route('profile'))
+            <option value="{{ $profile->user_id }}" selected>
+                {{ $profile->user->email }}
             </option>
         @else
             <option value="">Select the account</option>

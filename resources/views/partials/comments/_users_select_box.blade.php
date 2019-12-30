@@ -1,9 +1,15 @@
 <div class="form-group">
     <label for="commenter_id">Commenter: @asterisks @endasterisks</label>
-    <select name="commenter_id" id="commenter_id" class="form-control">
+    <select name="commenter_id" id="commenter_id" class="form-control"
+        {{ Request::route('comment') || Request::route('user') ? 'disabled' : '' }}
+    >
         @if (Request::route('user'))
-            <option value="{{ $user->id }}" selected>
+            <option>
                 {{ $user->email }}
+            </option>
+        @elseif(Request::route('comment'))
+            <option>
+                {{ $comment->commenter->email }}
             </option>
         @else
             <option value="">Select the commenter</option>

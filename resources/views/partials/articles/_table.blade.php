@@ -60,7 +60,7 @@
 @rowInfo(['name' => 'Image'])
     @if ($article->hasImage())
         <div class="w-1/2">
-            <img src="{{ ArticleImage::getUrl($article->image) }}"
+            <img src="{{ App::make('article_image')->getUrl($article->image) }}"
             alt="{{ $article->title }}" class="img-thumbnail">
         </div>
     @else

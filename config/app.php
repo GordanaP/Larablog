@@ -179,6 +179,7 @@ return [
         App\Providers\UtilityServiceProvider::class,
         App\Providers\DirectiveServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 
@@ -231,9 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'RedirectTo' => App\Facades\RedirectTo::class,
-        'ArticleImage' => App\Facades\ArticleImage::class,
         'ArticleStatus' => App\Facades\ArticleStatus::class,
-        'ProfileImage' => App\Facades\ProfileImage::class,
         'QueryManager' => App\Facades\QueryManager::class,
         'UrlManager' => App\Facades\UrlManager::class,
     ],

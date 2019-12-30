@@ -44,7 +44,7 @@
 
         @if (optional($profile ?? null)->hasAvatar())
             <div class="w-1/4">
-                <img src="{{ ProfileImage::getUrl($profile->avatar) }}"
+                <img src="{{ App::make('profile_image')->getUrl($profile->avatar) }}"
                 alt="Profile Avatar">
             </div>`
         @endif

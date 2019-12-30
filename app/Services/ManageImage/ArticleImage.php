@@ -2,10 +2,10 @@
 
 namespace App\Services\ManageImage;
 
-use App\Contracts\ModelImage;
-use App\Services\ManageImage\Image;
+use App\Contracts\ImageManager;
+use App\Services\ManageImage\AbstractImage;
 
-class ArticleImage extends Image implements ModelImage
+class ArticleImage extends AbstractImage implements ImageManager
 {
     public function manage($article, $data)
     {

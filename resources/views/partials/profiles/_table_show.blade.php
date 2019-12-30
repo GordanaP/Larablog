@@ -26,7 +26,7 @@
 @rowInfo(['name' => 'Avatar'])
     @if ($profile->hasAvatar())
         <div class="w-1/2">
-            <img src="{{ ProfileImage::getUrl($profile->avatar) }}"
+            <img src="{{ App::make('profile_image')->getUrl($profile->avatar) }}"
             alt="{{ $profile->title }}" class="img-thumbnail">
         </div>
     @else

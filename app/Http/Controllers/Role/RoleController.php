@@ -4,18 +4,27 @@ namespace App\Http\Controllers\Role;
 
 use App\Role;
 use App\Facades\RedirectTo;
-use App\Contracts\ModelManager;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
-use App\Services\ManageModel\RoleManager;
+use App\Repositories\RoleRepository;
 
 class RoleController extends Controller
 {
-    private $modelManager;
+    /**
+     * The repository implementation.
+     *
+     * @var \App\Contracts\RoleRepository
+     */
+    private $roles;
 
-    public function __construct(ModelManager $modelManager)
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Contracts\RoleRepository $roles
+     */
+    public function __construct(RoleRepository $roles)
     {
-        $this->modelManager = $modelManager;
+        $this->roles = $roles;
     }
 
     /**
@@ -25,9 +34,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles_count = Role::count();
-
-        return view('roles.index', compact('roles_count'));
+        return view('roles.index')->with([
+            'roles_count' => Role::count()
+        ]);
     }
 
     /**
@@ -48,8 +57,7 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
-        // $role = Role::create($request->validated());
-        $role = $this->modelManager->save($request->validated());
+        $role = Role::create($request->validated());
 
         return RedirectTo::route('roles', $role);
     }
@@ -85,9 +93,7 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
-        // $role->update($request->validated());
-        //
-        $this->modelManager->save($request->validated());
+        $role->update($request->validated());
 
         return RedirectTo::route('roles', $role);
     }
@@ -101,9 +107,7 @@ class RoleController extends Controller
      */
     public function destroy(RoleRequest $request, Role $role = null)
     {
-        // RoleManager::get($role ?? $request->validated()['ids'])->remove();
-
-        $this->modelManager->remove($role ?? $request->validated()['ids']);
+        $this->roles->remove($role ?? $request->validated()['ids']);
 
         return RedirectTo::route('roles');
     }

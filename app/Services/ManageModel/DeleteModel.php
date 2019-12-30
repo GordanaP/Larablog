@@ -12,6 +12,16 @@ abstract class DeleteModel
     protected $model;
 
     /**
+     * The records' count.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return $this->model::count();
+    }
+
+    /**
      * Delete one record or many records.
      *
      * @param  mixed $data
