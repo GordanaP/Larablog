@@ -30,7 +30,7 @@ Route::resource('users.articles', 'User\UserArticleController')
     ->only('index')
     ->middleware('can:viewAny, App\Article', 'can:touch, user');
 Route::resource('users.articles', 'User\UserArticleController')
-    ->only('create', 'store')
+    ->only('create')
     ->middleware('can:create, App\Article', 'can:create, App\Article');
 
 /**

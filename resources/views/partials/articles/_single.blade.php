@@ -30,7 +30,7 @@
     <hr>
 
     @if ($article->hasImage())
-        <img src="{{ ArticleImage::getUrl($article->image) }}" class="w-full mb-4"
+        <img src="{{ App::make('article_image')->getUrl($article->image) }}" class="w-full mb-4"
         alt="Article Image">
     @endif
 

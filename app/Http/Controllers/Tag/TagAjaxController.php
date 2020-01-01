@@ -15,6 +15,6 @@ class TagAjaxController extends Controller
      */
     public function index()
     {
-        return TagResource::collection(Tag::all());
+        return TagResource::collection(Tag::with('articles')->get());
     }
 }

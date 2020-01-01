@@ -55,17 +55,4 @@ class UserArticleController extends Controller
         return view('articles.create', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\ArticleRequest  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ArticleRequest $request, User $user)
-    {
-        $article = $this->articles->create($request->validated());
-
-        return RedirectTo::route('articles', $article);
-    }
 }

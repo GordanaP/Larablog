@@ -5,7 +5,7 @@ namespace App\Rules;
 use App\User;
 use Illuminate\Contracts\Validation\Rule;
 
-class IsAuthor implements Rule
+class MustBeAuthor implements Rule
 {
     /**
      * Create a new rule instance.

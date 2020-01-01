@@ -20,7 +20,7 @@ class RedirectRoute
      * @param  \App\Model $parameter
      * @return \Illuminate\Http\Response
      */
-    protected function toShow($name, $parameter)
+    protected function show($name, $parameter)
     {
         return redirect()->route($this->name($name, '.show'), $parameter);
     }
@@ -32,7 +32,7 @@ class RedirectRoute
      * @param  \App\Model $parameter
      * @return \Illuminate\Http\Response
      */
-    protected function toEdit($name, $parameter)
+    protected function edit($name, $parameter)
     {
         return redirect()->route($this->name($name, '.edit'), $parameter);
     }
@@ -43,7 +43,7 @@ class RedirectRoute
      * @param  string $name
      * @return \Illuminate\Http\Response
      */
-    protected function toIndex($name)
+    protected function index($name)
     {
         return redirect()->route($this->name($name, '.index'));
     }

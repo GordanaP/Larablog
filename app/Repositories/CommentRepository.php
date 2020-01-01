@@ -47,7 +47,7 @@ class CommentRepository extends DeleteModel implements EloquentModelRepository
      */
     public function all()
     {
-        return $this->model::all();
+        return $this->model::with('commenter', 'commentable')->get();
     }
 
     /**

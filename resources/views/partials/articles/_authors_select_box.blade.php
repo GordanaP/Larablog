@@ -8,7 +8,7 @@
                 {{ $profile->full_name }}
             </option>
         @elseif(Request::route('article'))
-            <option>
+            <option value="{{ $article->user->id }}">
                 {{ $article->user->profile->full_name }}
             </option>
         @else
@@ -25,3 +25,4 @@
 
     @isInvalid(['field' => 'user_id']) @endisInvalid
 </div>
+

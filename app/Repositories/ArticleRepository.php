@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\User;
 use App\Article;
 use App\Contracts\ImageManager;
+use Illuminate\Support\Facades\Request;
 use App\Services\ManageModel\DeleteModel;
 use App\Contracts\EloquentModelRepository;
 
@@ -27,7 +28,7 @@ class ArticleRepository extends DeleteModel implements EloquentModelRepository
     /**
      * The image.
      *
-     * @var [type]
+     * @var \Illuminate\Http\File
      */
     private $image;
 
@@ -46,7 +47,7 @@ class ArticleRepository extends DeleteModel implements EloquentModelRepository
     public function __construct(ImageManager $imageManager)
     {
         $this->model = Article::class;
-        $this->author = User::find(request('user_id'));
+        $this->author =  User::find(request('user_id'));
         $this->tags = request('tag_id');
         $this->image = request('image');
         $this->imageManager = $imageManager;
@@ -59,7 +60,7 @@ class ArticleRepository extends DeleteModel implements EloquentModelRepository
      */
     public function all()
     {
-        return $this->model::with('comments', 'category', 'user', 'tags', 'image')->get();
+        return $this->model::with('comments','user')->get();
     }
 
     /**

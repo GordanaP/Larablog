@@ -3,7 +3,9 @@
 namespace App\Services\ManageUrl;
 
 use Illuminate\Support\Str;
+use App\Utilities\SubmitForm;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use App\Services\ManageUrl\RedirectRoute;
 
 class RedirectTo extends RedirectRoute
@@ -28,8 +30,8 @@ class RedirectTo extends RedirectRoute
     public function __construct()
     {
         $this->user = Auth::user();
-        $this->handle_submission = request('handle_submission');
-        $this->method = request()->method();
+        $this->handle_submission = request(SubmitForm::get()->button_name);
+        $this->method = Request::method();
     }
 
     /**
@@ -69,7 +71,7 @@ class RedirectTo extends RedirectRoute
     {
         switch ($this->handle_submission) {
             case 'do_and_show':
-                return $this->toShow($routeName, $parameter);
+                return $this->show($routeName, $parameter);
                 break;
 
             case 'do_and_repeat':
@@ -89,11 +91,11 @@ class RedirectTo extends RedirectRoute
     {
         switch ($this->handle_submission) {
             case 'do_and_show':
-                return $this->toShow($routeName, $parameter);
+                return $this->show($routeName, $parameter);
                 break;
 
             case 'do_and_repeat':
-                return $this->toEdit($routeName, $parameter);
+                return $this->edit($routeName, $parameter);
                 break;
         }
     }
@@ -111,7 +113,7 @@ class RedirectTo extends RedirectRoute
                 'message' => 'The record has been deleted.',
             ]);
         } else {
-            return $this->toIndex($routeName)
+            return $this->index($routeName)
                 ->with('The record has been deleted.', 'success');
         }
     }

@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="commentable_id">Article: @asterisks @endasterisks</label>
     <select name="commentable_id" id="commentable_id" class="form-control"
-        {{ Request::route('comment') || Request::route('article') ? 'disabled' : '' }}
+        {{ Request::route('comment') ? 'disabled' : '' }}
     >
         @if (Request::route('article'))
             <option value="{{ $article->id }}">

@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
-use App\Rules\IsAuthor;
+use App\Rules\MustBeAuthor;
+use App\Rules\MustBeApproved;
 use App\Utilities\SubmitForm;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\MustBeApproved;
 
 class ArticleRequest extends FormRequest
 {
@@ -32,7 +32,7 @@ class ArticleRequest extends FormRequest
             'ids' => 'sometimes|exists:articles,id',
             'user_id' => [
                 'sometimes','required','exists:users,id',
-                new IsAuthor()
+                new MustBeAuthor
             ],
             'title' => [
                 'sometimes','required', 'min:5', 'max:100',

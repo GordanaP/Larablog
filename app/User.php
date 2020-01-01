@@ -143,15 +143,4 @@ class User extends Authenticatable
     {
         return $this->articles()->create($data);
     }
-
-    /**
-     * Make a comment.
-     *
-     * @param  array  $data
-     * @return \App\Comment
-     */
-    public function makeComment($data)
-    {
-        return $this->comments()->save($data);
-    }
 }
