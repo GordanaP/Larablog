@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\DatePresenter;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
@@ -67,5 +68,17 @@ class Profile extends Model
     public function hasAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Remove the article along with its image.
+     */
+    public function remove()
+    {
+        App::make('profile_image')->removeStoragePath($this->avatar);
+
+        optional($this->avatar)->delete();
+
+        $this->delete();
     }
 }

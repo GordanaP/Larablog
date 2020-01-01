@@ -107,7 +107,7 @@ class UserController extends Controller
      */
     public function destroy(UserRequest $request, User $user = null)
     {
-        $this->users->remove($user ?? $request->validated()['ids']);
+        $this->users->delete($user ?? $request->validated()['ids']);
 
         return RedirectTo::route('users');
     }

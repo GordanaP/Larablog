@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Comment;
 
+use App\CustomComment;
 use App\Facades\RedirectTo;
 use Illuminate\Http\Request;
-use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Contracts\EloquentModelRepository;
@@ -36,7 +36,7 @@ class CommentController extends Controller
     public function index()
     {
         return view('comments.index')->with([
-            'comments_count' => Comment::count()
+            'comments_count' => CustomComment::count()
         ]);
     }
 
@@ -69,7 +69,7 @@ class CommentController extends Controller
      * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(CustomComment $comment)
     {
         return view('comments.show', compact('comment'));
     }
@@ -80,7 +80,7 @@ class CommentController extends Controller
      * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(CustomComment $comment)
     {
         return view('comments.edit', compact('comment'));
     }
@@ -92,7 +92,7 @@ class CommentController extends Controller
      * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(CommentRequest $request, Comment $comment)
+    public function update(CommentRequest $request, CustomComment $comment)
     {
         $this->comments->update($comment, $request->validated());
 
@@ -106,9 +106,9 @@ class CommentController extends Controller
      * @param  \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CommentRequest $request, Comment $comment = null)
+    public function destroy(CommentRequest $request, CustomComment $comment = null)
     {
-        $this->comments->remove($comment ?? $request->validated()['ids']);
+        $this->comments->delete($comment ?? $request->validated()['ids']);
 
         return RedirectTo::route('comments');
     }

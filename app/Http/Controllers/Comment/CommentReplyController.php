@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Comment;
 
+use App\CustomComment;
 use App\Facades\RedirectTo;
-use Laravelista\Comments\Comment;
 use App\Http\Requests\ReplyRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\ReplyRepository;
@@ -33,7 +33,7 @@ class CommentReplyController extends Controller
      * @param \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function create(Comment $comment)
+    public function create(CustomComment $comment)
     {
         return view('replies.create', compact('comment'));
     }
@@ -45,7 +45,7 @@ class CommentReplyController extends Controller
      * @param \Laravelista\Comments\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function store(ReplyRequest $request, Comment $comment)
+    public function store(ReplyRequest $request, CustomComment $comment)
     {
         $comment = $this->replies->create($request->validated());
 

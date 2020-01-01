@@ -107,7 +107,7 @@ class CategoryController extends Controller
      */
     public function destroy(CategoryRequest $request, Category $category = null)
     {
-        $this->categories->remove($category ?? $request->validated()['ids']);
+        $this->categories->delete($category ?? $request->validated()['ids']);
 
         return RedirectTo::route('categories');
     }

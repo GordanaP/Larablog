@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Comment;
 
-use Laravelista\Comments\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Contracts\EloquentModelRepository;

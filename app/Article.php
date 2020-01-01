@@ -6,6 +6,7 @@ use App\Traits\DatePresenter;
 use App\Traits\Article\Scopeable;
 use Laravelista\Comments\Comment;
 use App\Traits\Article\Presentable;
+use Illuminate\Support\Facades\App;
 use Laravelista\Comments\Commentable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -135,5 +136,17 @@ class Article extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Remove the article along with its image.
+     */
+    public function remove()
+    {
+        App::make('article_image')->removeStoragePath($this->image);
+
+        optional($this->image)->delete();
+
+        $this->delete();
     }
 }

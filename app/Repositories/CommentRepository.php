@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\User;
 use App\Article;
-use Laravelista\Comments\Comment;
+use App\CustomComment;
 use Illuminate\Support\Facades\Request;
 use App\Services\ManageModel\DeleteModel;
 use App\Contracts\EloquentModelRepository;
@@ -34,7 +34,7 @@ class CommentRepository extends DeleteModel implements EloquentModelRepository
 
     public function __construct()
     {
-        $this->model = Comment::class;
+        $this->model = CustomComment::class;
         $this->article  = Article::find(request('commentable_id'));
         $this->user  = User::find(request('user') ?? request('commenter_id'));
         $this->guest  = request('user') == 'guest';

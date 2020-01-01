@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\CustomComment;
 use App\Traits\DatePresenter;
 use App\Traits\User\HasRoles;
 use App\Traits\User\Presentable;
-use Laravelista\Comments\Comment;
+// use Laravelista\Comments\Comment;
 use Laravelista\Comments\Commenter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -119,7 +120,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'commenter_id');
+        return $this->hasMany(CustomComment::class, 'commenter_id');
     }
 
     /**
@@ -142,5 +143,17 @@ class User extends Authenticatable
     public function createArticle(array $data)
     {
         return $this->articles()->create($data);
+    }
+
+    /**
+     * Remove the user.
+     */
+    public function remove()
+    {
+        optional($this->profile)->remove();
+
+        optional($this->comments)->map->delete();
+
+        $this->delete();
     }
 }

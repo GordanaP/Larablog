@@ -107,7 +107,7 @@ class RoleController extends Controller
      */
     public function destroy(RoleRequest $request, Role $role = null)
     {
-        $this->roles->remove($role ?? $request->validated()['ids']);
+        $this->roles->delete($role ?? $request->validated()['ids']);
 
         return RedirectTo::route('roles');
     }

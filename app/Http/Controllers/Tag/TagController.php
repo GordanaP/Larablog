@@ -107,7 +107,7 @@ class TagController extends Controller
      */
     public function destroy(TagRequest $request, Tag $tag = null)
     {
-        $this->tags->remove($tag ?? $request->validated()['ids']);
+        $this->tags->delete($tag ?? $request->validated()['ids']);
 
         return RedirectTo::route('tags');
     }

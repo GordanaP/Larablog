@@ -12,25 +12,27 @@ abstract class DeleteModel
     protected $model;
 
     /**
-     * The records' count.
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return $this->model::count();
-    }
-
-    /**
      * Delete one record or many records.
      *
      * @param  mixed $data
      *
      */
-    public function remove($data)
+    public function delete($data)
     {
-        is_array($data) ? $this->deleteMany($data)
-            : $data->delete();
+        is_array($data) ? $this->removeMany($data)
+            : $this->removeOne($data);
+    }
+
+    /**
+     * Delete a single record.
+     *
+     * @param  \App\Model $model
+     */
+    private function removeOne($model)
+    {
+        method_exists($this->model, 'remove')
+            ? $model->remove()
+            : $model->delete();
     }
 
     /**
@@ -38,8 +40,21 @@ abstract class DeleteModel
      *
      * @param  array $data
      */
-    private function deleteMany($data)
+    private function removeMany($data)
     {
-        $this->model::findMany($data)->map->delete();
+        method_exists($this->model, 'remove')
+            ? $this->records($data)->map->remove()
+            : $this->records($data)->map->delete();
+    }
+
+    /**
+     * The records.
+     *
+     * @param  array $data
+     * @return \Illuminate\Support\Cllection
+     */
+    private function records($data)
+    {
+        return $this->model::findMany($data);
     }
 }

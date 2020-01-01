@@ -107,7 +107,7 @@ class ProfileController extends Controller
      */
     public function destroy(ProfileRequest $request, Profile $profile = null)
     {
-        $this->profiles->remove($profile ?? $request->validated()['ids']);
+        $this->profiles->delete($profile ?? $request->validated()['ids']);
 
         return RedirectTo::route('profiles');
     }

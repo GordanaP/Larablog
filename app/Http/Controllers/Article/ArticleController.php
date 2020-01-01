@@ -110,7 +110,7 @@ class ArticleController extends Controller
      */
     public function destroy(ArticleRequest $request, Article $article = null)
     {
-        $this->articles->remove($article ?? $request->validated()['ids']);
+        $this->articles->delete($article ?? $request->validated()['ids']);
 
         return RedirectTo::route('articles');
     }
