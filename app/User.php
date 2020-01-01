@@ -144,16 +144,4 @@ class User extends Authenticatable
     {
         return $this->articles()->create($data);
     }
-
-    /**
-     * Remove the user.
-     */
-    public function remove()
-    {
-        optional($this->profile)->remove();
-
-        optional($this->comments)->map->delete();
-
-        $this->delete();
-    }
 }

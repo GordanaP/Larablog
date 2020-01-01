@@ -35,7 +35,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index')->with([
-            'users_count' => $this->users->count()
+            'users_count' => User::count()
         ]);
     }
 

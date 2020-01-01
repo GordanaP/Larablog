@@ -69,16 +69,4 @@ class Profile extends Model
     {
         return $this->avatar;
     }
-
-    /**
-     * Remove the article along with its image.
-     */
-    public function remove()
-    {
-        App::make('profile_image')->removeStoragePath($this->avatar);
-
-        optional($this->avatar)->delete();
-
-        $this->delete();
-    }
 }

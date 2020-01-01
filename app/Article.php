@@ -137,16 +137,4 @@ class Article extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-
-    /**
-     * Remove the article along with its image.
-     */
-    public function remove()
-    {
-        App::make('article_image')->removeStoragePath($this->image);
-
-        optional($this->image)->delete();
-
-        $this->delete();
-    }
 }
